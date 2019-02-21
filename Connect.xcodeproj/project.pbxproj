@@ -15,6 +15,8 @@
 		0F22678F221DFEA80052BB21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F22678D221DFEA80052BB21 /* LaunchScreen.storyboard */; };
 		0F22679A221DFEA80052BB21 /* ConnectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F226799221DFEA80052BB21 /* ConnectTests.swift */; };
 		0F2267A5221DFEA80052BB21 /* ConnectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2267A4221DFEA80052BB21 /* ConnectUITests.swift */; };
+		0F2267B4221E00A20052BB21 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2267B3221E00A20052BB21 /* LoginVC.swift */; };
+		0F2267B6221E7A230052BB21 /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2267B5221E7A230052BB21 /* SignupVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		0F2267A0221DFEA80052BB21 /* ConnectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConnectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F2267A4221DFEA80052BB21 /* ConnectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectUITests.swift; sourceTree = "<group>"; };
 		0F2267A6221DFEA80052BB21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0F2267B3221E00A20052BB21 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		0F2267B5221E7A230052BB21 /* SignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +103,7 @@
 		0F226780221DFEA60052BB21 /* Connect */ = {
 			isa = PBXGroup;
 			children = (
+				0F2267B2221E007D0052BB21 /* Controller */,
 				0F226781221DFEA60052BB21 /* AppDelegate.swift */,
 				0F226783221DFEA60052BB21 /* ViewController.swift */,
 				0F226785221DFEA60052BB21 /* Main.storyboard */,
@@ -126,6 +131,15 @@
 				0F2267A6221DFEA80052BB21 /* Info.plist */,
 			);
 			path = ConnectUITests;
+			sourceTree = "<group>";
+		};
+		0F2267B2221E007D0052BB21 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				0F2267B3221E00A20052BB21 /* LoginVC.swift */,
+				0F2267B5221E7A230052BB21 /* SignupVC.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,7 +274,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F226784221DFEA60052BB21 /* ViewController.swift in Sources */,
+				0F2267B6221E7A230052BB21 /* SignupVC.swift in Sources */,
 				0F226782221DFEA60052BB21 /* AppDelegate.swift in Sources */,
+				0F2267B4221E00A20052BB21 /* LoginVC.swift in Sources */,
 				0F22678A221DFEA60052BB21 /* Connect.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -437,7 +453,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GFXBHE9YLC;
 				INFOPLIST_FILE = Connect/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -454,7 +472,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GFXBHE9YLC;
 				INFOPLIST_FILE = Connect/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

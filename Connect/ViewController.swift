@@ -12,8 +12,14 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
     }
+    
+    @objc func handleLogout() {
+        let vc = LoginVC()
+        present(vc, animated: true, completion: nil)
+    }
+    
 
 
 }
