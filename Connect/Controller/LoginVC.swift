@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class LoginVC: UIViewController ,UITextFieldDelegate {
     
@@ -21,7 +22,7 @@ class LoginVC: UIViewController ,UITextFieldDelegate {
         e.layer.borderWidth = 2
         e.textAlignment = .left
         e.setLeftPaddingPoints(10)
-        return e;
+        return e
     }()
     
     var signInlabel: UILabel = {
@@ -36,7 +37,7 @@ class LoginVC: UIViewController ,UITextFieldDelegate {
     
     let icon:UIImageView = {
         let l = UIImageView()
-      //  l.image = #imageLiteral(resourceName: "logo")
+        //  l.image = #imageLiteral(resourceName: "logo")
         l.contentMode = .scaleAspectFit
         l.layer.masksToBounds = true
         l.layer.cornerRadius = 20
@@ -124,12 +125,12 @@ class LoginVC: UIViewController ,UITextFieldDelegate {
     }
     
     
-     func setupTextFieldComponents(){
+    func setupTextFieldComponents(){
         setupEmailField()
         setupPasswordField()
     }
     
-     func setupAddLogo(){
+    func setupAddLogo(){
         view.addSubview(icon)
         view.addSubview(signInlabel)
         icon.anchors(top: view.safeAreaLayoutGuide.topAnchor, topPad: 40, bottom: nil, bottomPad: 0, left: nil, leftPad: 0, right: nil, rightPad: 0, height: 150, width: 150)
@@ -140,7 +141,7 @@ class LoginVC: UIViewController ,UITextFieldDelegate {
         signInlabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
     }
     
-     func setupEmailField(){
+    func setupEmailField(){
         view.addSubview(emailTextField)
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
         emailTextField.topAnchor.constraint(equalTo: signInlabel.bottomAnchor, constant: 10).isActive = true
@@ -149,7 +150,7 @@ class LoginVC: UIViewController ,UITextFieldDelegate {
         emailTextField.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
     
-     func setupPasswordField(){
+    func setupPasswordField(){
         view.addSubview(passwordTextField);
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false;
         passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 10).isActive=true;
@@ -158,7 +159,7 @@ class LoginVC: UIViewController ,UITextFieldDelegate {
         passwordTextField.heightAnchor.constraint(equalToConstant: 40).isActive = true;
     }
     
-     func setupLoginButton(){
+    func setupLoginButton(){
         view.addSubview(loginbutton)
         loginbutton.translatesAutoresizingMaskIntoConstraints = false;
         loginbutton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 12).isActive = true;
@@ -167,7 +168,7 @@ class LoginVC: UIViewController ,UITextFieldDelegate {
         loginbutton.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
     
-     func setupForgotPasswordButton(){
+    func setupForgotPasswordButton(){
         view.addSubview(forgotPasswordbutton)
         forgotPasswordbutton.translatesAutoresizingMaskIntoConstraints = false;
         forgotPasswordbutton.topAnchor.constraint(equalTo: loginbutton.bottomAnchor, constant: 8).isActive = true;
@@ -176,7 +177,7 @@ class LoginVC: UIViewController ,UITextFieldDelegate {
         forgotPasswordbutton.heightAnchor.constraint(equalToConstant: 30).isActive = true;
     }
     
-     func setuphaveAnAccountbutton(){
+    func setuphaveAnAccountbutton(){
         view.addSubview(haveAnAccountButton)
         haveAnAccountButton.translatesAutoresizingMaskIntoConstraints = false
         haveAnAccountButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8).isActive = true
@@ -193,11 +194,28 @@ class LoginVC: UIViewController ,UITextFieldDelegate {
     
     @objc func loginAction(){
         
-        let vc = SignupVC()
-        self.present(vc, animated: true, completion: nil)
+        guard let email = emailTextField.text , let password = passwordTextField.text else {
+            print("Issue !!")
+            return
+        }
         
+        Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+            if error != nil {
+                print(error)
+            }
+            else{
+                print("Login success!")
+                UserDefaults.standard.set(true, forKey: "Login")
+                self.dismiss(animated: true, completion: {
+                    let controller = TabBarController()
+                    self.navigationController?.pushViewController(controller, animated: true)
+                })
+            }
+        }
     }
+    
 }
+
 
 extension UITextField {
     func setPadding() {

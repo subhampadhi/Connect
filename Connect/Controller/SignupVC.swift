@@ -7,12 +7,17 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
+import FirebaseDatabase
+
 
 class SignupVC: UIViewController , UITextFieldDelegate {
     
-    let UserNameTextField:UITextField = {
+    
+    let userNameTextField:UITextField = {
         let u = UITextField()
-        let attributedPlaceholder = NSAttributedString(string:"Email",attributes:[NSAttributedString.Key.foregroundColor:UIColor.white])
+        let attributedPlaceholder = NSAttributedString(string:"Name",attributes:[NSAttributedString.Key.foregroundColor:UIColor.white])
         u.attributedPlaceholder = attributedPlaceholder;
         u.textColor = .white
         u.setBottomBorder(backGroundColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), borderColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))
@@ -21,7 +26,7 @@ class SignupVC: UIViewController , UITextFieldDelegate {
     
     let icon:UIImageView = {
         let l = UIImageView()
-      //  l.image = #imageLiteral(resourceName: "logo")
+        //  l.image = #imageLiteral(resourceName: "logo")
         l.contentMode = .scaleAspectFit
         l.layer.masksToBounds = true
         l.layer.cornerRadius = 20;
@@ -30,7 +35,7 @@ class SignupVC: UIViewController , UITextFieldDelegate {
     
     let emailTextField:UITextField = {
         let e = UITextField()
-        let attributedPlaceholder = NSAttributedString(string:"User Name",attributes:[NSAttributedString.Key.foregroundColor:UIColor.white])
+        let attributedPlaceholder = NSAttributedString(string:"Email",attributes:[NSAttributedString.Key.foregroundColor:UIColor.white])
         e.attributedPlaceholder = attributedPlaceholder;
         e.textColor = .white
         e.setBottomBorder(backGroundColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), borderColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))
@@ -52,7 +57,7 @@ class SignupVC: UIViewController , UITextFieldDelegate {
         p.attributedPlaceholder = attributedPlaceholder;
         p.textColor = .white
         p.setBottomBorder(backGroundColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), borderColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))
-        p.isSecureTextEntry = true
+        //  p.isSecureTextEntry = true
         return p
     }()
     
@@ -62,7 +67,7 @@ class SignupVC: UIViewController , UITextFieldDelegate {
         c.attributedPlaceholder = attributedPlaceholder;
         c.textColor = .white
         c.setBottomBorder(backGroundColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), borderColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))
-        c.isSecureTextEntry = true;
+        // c.isSecureTextEntry = true;
         return c
     }()
     
@@ -98,7 +103,7 @@ class SignupVC: UIViewController , UITextFieldDelegate {
         setuphaveAccountButton()
         setuptextfieldComponents()
         setupRegisterButton()
-        UserNameTextField.delegate = self
+        userNameTextField.delegate = self
         passwordTextField.delegate = self
         emailTextField.delegate = self
         confirmPasswordTextField.delegate = self
@@ -124,7 +129,7 @@ class SignupVC: UIViewController , UITextFieldDelegate {
     @objc func signinAction(){
         self.dismiss(animated: true, completion: nil)
     }
-
+    
     fileprivate func setuphaveAccountButton(){
         view.addSubview(haveAnAccountButton)
         haveAnAccountButton.anchors(top: nil, topPad: 0, bottom: view.safeAreaLayoutGuide.bottomAnchor, bottomPad: 8, left: view.leftAnchor, leftPad: 0, right: view.rightAnchor, rightPad: 0, height: 20, width: 0);
@@ -138,14 +143,14 @@ class SignupVC: UIViewController , UITextFieldDelegate {
         setupConfirmPasswordField()
     }
     
-    fileprivate func setupAddLogo(){
+    func setupAddLogo(){
         view.addSubview(icon)
         icon.anchors(top: view.safeAreaLayoutGuide.topAnchor, topPad: 10, bottom: nil, bottomPad: 0, left: nil, leftPad: 0, right: nil, rightPad: 0, height: 150, width: 150)
-        icon.centerXAnchor.constraint(equalTo:view.centerXAnchor).isActive=true;
+        icon.centerXAnchor.constraint(equalTo:view.centerXAnchor).isActive=true
     }
     
     fileprivate func setupMobileNumberField(){
-        view.addSubview(mobileTextField);
+        view.addSubview(mobileTextField)
         mobileTextField.translatesAutoresizingMaskIntoConstraints = false;
         mobileTextField.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true;
         mobileTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 24).isActive = true;
@@ -163,12 +168,12 @@ class SignupVC: UIViewController , UITextFieldDelegate {
     }
     
     fileprivate func setupUserNameField(){
-        view.addSubview(UserNameTextField);
-        UserNameTextField.translatesAutoresizingMaskIntoConstraints = false;
-        UserNameTextField.bottomAnchor.constraint(equalTo: mobileTextField.topAnchor, constant: -30).isActive = true;
-        UserNameTextField.leftAnchor.constraint(equalTo: mobileTextField.leftAnchor, constant: 0).isActive = true;
-        UserNameTextField.rightAnchor.constraint(equalTo:  mobileTextField.rightAnchor, constant: 0).isActive = true;
-        UserNameTextField.heightAnchor.constraint(equalToConstant: 30).isActive = true;
+        view.addSubview(userNameTextField);
+        userNameTextField.translatesAutoresizingMaskIntoConstraints = false;
+        userNameTextField.bottomAnchor.constraint(equalTo: mobileTextField.topAnchor, constant: -30).isActive = true;
+        userNameTextField.leftAnchor.constraint(equalTo: mobileTextField.leftAnchor, constant: 0).isActive = true;
+        userNameTextField.rightAnchor.constraint(equalTo:  mobileTextField.rightAnchor, constant: 0).isActive = true;
+        userNameTextField.heightAnchor.constraint(equalToConstant: 30).isActive = true;
     }
     
     fileprivate func setupConfirmPasswordField(){
@@ -183,9 +188,9 @@ class SignupVC: UIViewController , UITextFieldDelegate {
     fileprivate func setupEmailField(){
         view.addSubview(emailTextField)
         emailTextField.translatesAutoresizingMaskIntoConstraints = false;
-        emailTextField.bottomAnchor.constraint(equalTo: UserNameTextField.topAnchor, constant: -30).isActive = true;
-        emailTextField.leftAnchor.constraint(equalTo: UserNameTextField.leftAnchor, constant: 0).isActive = true;
-        emailTextField.rightAnchor.constraint(equalTo: UserNameTextField.rightAnchor, constant: 0).isActive = true;
+        emailTextField.bottomAnchor.constraint(equalTo: userNameTextField.topAnchor, constant: -30).isActive = true;
+        emailTextField.leftAnchor.constraint(equalTo: userNameTextField.leftAnchor, constant: 0).isActive = true;
+        emailTextField.rightAnchor.constraint(equalTo: userNameTextField.rightAnchor, constant: 0).isActive = true;
         emailTextField.heightAnchor.constraint(equalToConstant: 30).isActive = true;
     }
     
@@ -198,7 +203,42 @@ class SignupVC: UIViewController , UITextFieldDelegate {
         registerButton.heightAnchor.constraint(equalToConstant: 50).isActive = true;
     }
     
-    @objc func signupAction() {}
+    @objc func signupAction() {
+        guard let email = emailTextField.text , let password = passwordTextField.text , let username =  userNameTextField.text , let mobileNumber = mobileTextField.text else {
+            print("Issue !!")
+            return
+        }
+        print(email)
+        print(password)
+        Auth.auth().createUser(withEmail: email   , password: password) { authResult, error in
+            
+            if error != nil {
+                print("error occured!")
+                print(error)
+                return
+            }else {
+                let ref = Database.database().reference(fromURL: "https://connect-4822f.firebaseio.com/")
+        
+                guard let userID = Auth.auth().currentUser?.uid else {return}
+
+                let userRefrence = ref.child("users").child(userID)
+                let values = ["name": username , "email": email , "phone": mobileNumber]
+                userRefrence.updateChildValues(values, withCompletionBlock: { (err, ref) in
+                    
+                    if err != nil {
+                        print(err)
+                        return
+                    }else {
+                        print("Saved user into db")
+                    }
+                    
+                })
+                
+                
+            }
+        }
+    }
+    
     
 }
 
