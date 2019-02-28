@@ -32,7 +32,7 @@ class AddUserVC: UIViewController , UITableViewDelegate , UITableViewDataSource 
     }()
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
+        return 120
     }
     
 
@@ -51,6 +51,8 @@ class AddUserVC: UIViewController , UITableViewDelegate , UITableViewDataSource 
         usersTable.delegate = self
         
         usersTable.register(UserCell.self, forCellReuseIdentifier: "userCell")
+        usersTable.register(IncommingChatMessageCell.self, forCellReuseIdentifier: "incommingChatMessageCell")
+        usersTable.register(OutgoingChatMessageCell.self, forCellReuseIdentifier: "outgoingChatMessageCell")
         
         if #available(iOS 11.0, *) {
             addMemberButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
@@ -69,12 +71,12 @@ class AddUserVC: UIViewController , UITableViewDelegate , UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 12
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "userCell") as! UserCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "outgoingChatMessageCell") as! OutgoingChatMessageCell
         return cell
     }
 }

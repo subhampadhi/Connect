@@ -16,7 +16,7 @@ class MessagesViewController: UIViewController , UITableViewDelegate , UITableVi
     var userInfo: Users?
     var isReady = false
     var groupIds : [String]?
-    var groupInfoArray:[Groups]?
+    var groupInfoArray = [Groups]()
     
     
     override func viewDidLoad() {
@@ -36,7 +36,7 @@ class MessagesViewController: UIViewController , UITableViewDelegate , UITableVi
     
     func findGroupsForUser() {
         
-        let ref = Database.database().reference(fromURL: "https://connect-4822f.firebaseio.com/")
+        let ref = Database.database().reference()
         
         guard let userID = Auth.auth().currentUser?.uid else {return}
         
@@ -46,24 +46,18 @@ class MessagesViewController: UIViewController , UITableViewDelegate , UITableVi
             do {
                 let model = try FirebaseDecoder().decode(Users.self, from: value)
                 self.userInfo = model
-                self.isReady = true
                 self.groupIds = self.userInfo?.groups
                 self.getGroupInfo()
-                DispatchQueue.main.async {
-                    
-                    self.messagesTable.reloadData()
-                }
             }catch let error {
                 print(error)
             }
         })
-        
     }
     
     func getGroupInfo()  {
         
         var groups:[String]?
-        let ref = Database.database().reference(fromURL: "https://connect-4822f.firebaseio.com/")
+        let ref = Database.database().reference()
         if groupIds?.count != nil {
         for ids in groupIds! {
             ref.child("Groups").child(ids).observeSingleEvent(of: .value , with: { (snapshot) in
@@ -71,8 +65,11 @@ class MessagesViewController: UIViewController , UITableViewDelegate , UITableVi
                 
                 do {
                     let model = try FirebaseDecoder().decode(Groups.self, from: value)
-                    
-                    print(model)
+                    self.groupInfoArray.append(model)
+                    self.isReady = true
+                    DispatchQueue.main.async {
+                        self.messagesTable.reloadData()
+                    }
                 } catch let error {
                     print(error)
                 }
@@ -113,8 +110,8 @@ class MessagesViewController: UIViewController , UITableViewDelegate , UITableVi
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isReady {
-            if (userInfo?.groups?.count) != nil {
-                return (userInfo?.groups?.count)! + 1
+            if groupInfoArray.count != nil {
+                return groupInfoArray.count + 1
                 
             } else {
                 return 1
@@ -125,21 +122,33 @@ class MessagesViewController: UIViewController , UITableViewDelegate , UITableVi
         }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            return
+        } else {
+            let vc = ChatScreenVC()
+            vc.groupInfo = groupInfoArray[indexPath.row - 1]
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell") as! HeaderCell
+            cell.selectionStyle = .none
             cell.addItem = {
                 () in
               //  let vc = CreateGroupVC()
-                let vc = AddUserVC()
+                let vc = CreateGroupVC()
                 vc.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(vc, animated: true)
             }
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "messagesCell") as! MessagesCell
-            cell.groupNameLabel.text = userInfo?.groups![indexPath.row - 1]
+            cell.selectionStyle = .none
+            cell.groupNameLabel.text = groupInfoArray[indexPath.row - 1].Group_Name
             return cell
         }
         

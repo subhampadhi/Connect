@@ -14,7 +14,7 @@ import CodableFirebase
 class CreateGroupVC: UIViewController {
     
     var groupArrayValues : [String]?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 0.9607843137, green: 0.9607843137, blue: 0.9607843137, alpha: 1)
@@ -31,7 +31,7 @@ class CreateGroupVC: UIViewController {
         return label
     }()
     
-     var groupNameText: UITextField = {
+    var groupNameText: UITextField = {
         let nameText = UITextField()
         nameText.translatesAutoresizingMaskIntoConstraints = false
         nameText.attributedPlaceholder = NSAttributedString(text: " (required)", aligment: .left)
@@ -52,15 +52,15 @@ class CreateGroupVC: UIViewController {
         return label
     }()
     
-     var groupInfoText: UITextField = {
+    var groupInfoText: UITextField = {
         let nameText = UITextField()
         nameText.translatesAutoresizingMaskIntoConstraints = false
         nameText.attributedPlaceholder = NSAttributedString(text: " (optional)", aligment: .left)
         nameText.setPadding()
         nameText.setBottomBorder()
         nameText.font = nameText.font?.withSize(14)
-         nameText.setBottomBorder(backGroundColor: #colorLiteral(red: 0.9607843137, green: 0.9607843137, blue: 0.9607843137, alpha: 1), borderColor: #colorLiteral(red: 0.4078431373, green: 0.1176470588, blue: 0.4392156863, alpha: 1))
-       
+        nameText.setBottomBorder(backGroundColor: #colorLiteral(red: 0.9607843137, green: 0.9607843137, blue: 0.9607843137, alpha: 1), borderColor: #colorLiteral(red: 0.4078431373, green: 0.1176470588, blue: 0.4392156863, alpha: 1))
+        
         return nameText
     }()
     
@@ -81,27 +81,47 @@ class CreateGroupVC: UIViewController {
         guard let groupName = groupNameText.text , let groupInfoText = groupInfoText.text else { return }
         
         
-            let ref = Database.database().reference(fromURL: "https://connect-4822f.firebaseio.com/")
-            
-            guard let userID = Auth.auth().currentUser?.uid else {return}
+        let ref = Database.database().reference()
         
-            let groupRefrence = ref.child("Groups").childByAutoId()
-            let value = groupRefrence.key
-            let userRefrence = ref.child("users").child(userID).child("groups").childByAutoId()
+        guard let userID = Auth.auth().currentUser?.uid else {return}
+        
+        let groupRefrence = ref.child("Groups").childByAutoId()
+        let groupId = groupRefrence.key
         
         let values = ["Group_Name":groupName , "Description": groupInfoText , "Members":["\(userID)"]] as [String : Any]
-            groupRefrence.updateChildValues(values, withCompletionBlock: { (err, ref) in
+        groupRefrence.updateChildValues(values, withCompletionBlock: { (err, ref) in
+            
+            if err != nil {
+                print(err!)
+                return
+            } else {
                 
-                if err != nil {
-                    print(err!)
-                    return
+            }
+        })
+        
+        ref.child("users").child(userID).observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            guard let value = snapshot.value else { return }
+            
+            do {
+                let model = try FirebaseDecoder().decode(Users.self, from: value)
+                var groups = model.groups
+                if groups == nil {
+                    var groupArray = [String]()
+                    groupArray.append(groupId!)
+                    ref.child("users").child(userID).updateChildValues(["groups" : groupArray])
                 }else {
-                    userRefrence.updateChildValues(["id" :"\(value!)"])
-                    print("Saved user into db")
+                groups?.append(groupId!)
+                ref.child("users").child(userID).updateChildValues(["groups" : groups])
+                print("Saved user into db")
                     self.navigationController?.popViewController(animated: true)
                 }
-                
-            })
+            } catch let error {
+                print(error)
+            }
+        }) { (error) in
+            print(error.localizedDescription)
+        }
     }
     
     func initViews() {
@@ -129,7 +149,7 @@ class CreateGroupVC: UIViewController {
         groupInfoText.topAnchor.constraint(equalTo: groupInfoLabel.bottomAnchor, constant: 10).isActive = true
         
         
-
+        
         if #available(iOS 11.0, *) {
             createButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         } else {
@@ -138,8 +158,8 @@ class CreateGroupVC: UIViewController {
         createButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
         createButton.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         createButton.heightAnchor.constraint(equalToConstant: 51).isActive = true
-    
+        
     }
-
-
+    
+    
 }
