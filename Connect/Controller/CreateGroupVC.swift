@@ -9,8 +9,11 @@
 import UIKit
 import FirebaseDatabase
 import FirebaseAuth
+import CodableFirebase
 
 class CreateGroupVC: UIViewController {
+    
+    var groupArrayValues : [String]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,15 +87,16 @@ class CreateGroupVC: UIViewController {
         
             let groupRefrence = ref.child("Groups").childByAutoId()
             let value = groupRefrence.key
-            let userRefrence = ref.child("users").child(userID)
-        let values = ["Group Name":groupName , "Description": groupInfoText , "Members":["\(userID)"]] as [String : Any]
+            let userRefrence = ref.child("users").child(userID).child("groups").childByAutoId()
+        
+        let values = ["Group_Name":groupName , "Description": groupInfoText , "Members":["\(userID)"]] as [String : Any]
             groupRefrence.updateChildValues(values, withCompletionBlock: { (err, ref) in
                 
                 if err != nil {
                     print(err!)
                     return
                 }else {
-                    userRefrence.updateChildValues(["groups" :["\(value!)"]])
+                    userRefrence.updateChildValues(["id" :"\(value!)"])
                     print("Saved user into db")
                     self.navigationController?.popViewController(animated: true)
                 }

@@ -8,22 +8,79 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseDatabase
+import CodableFirebase
 
 class MessagesViewController: UIViewController , UITableViewDelegate , UITableViewDataSource {
     
-
+    var userInfo: Users?
+    var isReady = false
+    var groupIds : [String]?
+    var groupInfoArray:[Groups]?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 0.9607843137, green: 0.9607843137, blue: 0.9607843137, alpha: 1)
         setUpViews()
+        findGroupsForUser()
     }
     
-    lazy var messagesTable: UITableView = {
+     var messagesTable: UITableView = {
         let view = UITableView()
         view.separatorStyle = .none
+        view.backgroundColor = #colorLiteral(red: 0.9607843137, green: 0.9607843137, blue: 0.9607843137, alpha: 1)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
+    func findGroupsForUser() {
+        
+        let ref = Database.database().reference(fromURL: "https://connect-4822f.firebaseio.com/")
+        
+        guard let userID = Auth.auth().currentUser?.uid else {return}
+        
+        ref.child("users").child(userID).observeSingleEvent(of: .value, with: { snapshot in
+            guard let value = snapshot.value else { return }
+            
+            do {
+                let model = try FirebaseDecoder().decode(Users.self, from: value)
+                self.userInfo = model
+                self.isReady = true
+                self.groupIds = self.userInfo?.groups
+                self.getGroupInfo()
+                DispatchQueue.main.async {
+                    
+                    self.messagesTable.reloadData()
+                }
+            }catch let error {
+                print(error)
+            }
+        })
+        
+    }
+    
+    func getGroupInfo()  {
+        
+        var groups:[String]?
+        let ref = Database.database().reference(fromURL: "https://connect-4822f.firebaseio.com/")
+        if groupIds?.count != nil {
+        for ids in groupIds! {
+            ref.child("Groups").child(ids).observeSingleEvent(of: .value , with: { (snapshot) in
+                guard let value = snapshot.value else { return }
+                
+                do {
+                    let model = try FirebaseDecoder().decode(Groups.self, from: value)
+                    
+                    print(model)
+                } catch let error {
+                    print(error)
+                }
+                
+            })
+        }
+        }
+    }
     
     func setUpViews() {
         
@@ -55,7 +112,17 @@ class MessagesViewController: UIViewController , UITableViewDelegate , UITableVi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        if isReady {
+            if (userInfo?.groups?.count) != nil {
+                return (userInfo?.groups?.count)! + 1
+                
+            } else {
+                return 1
+            }
+            
+        } else {
+            return 1
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -64,13 +131,15 @@ class MessagesViewController: UIViewController , UITableViewDelegate , UITableVi
             let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell") as! HeaderCell
             cell.addItem = {
                 () in
-                let vc = CreateGroupVC()
+              //  let vc = CreateGroupVC()
+                let vc = AddUserVC()
                 vc.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(vc, animated: true)
             }
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "messagesCell") as! MessagesCell
+            cell.groupNameLabel.text = userInfo?.groups![indexPath.row - 1]
             return cell
         }
         
@@ -144,10 +213,43 @@ class MessagesCell: UITableViewCell{
         backgroundColor = #colorLiteral(red: 0.9607843137, green: 0.9607843137, blue: 0.9607843137, alpha: 1)
     }
     
+    var backgroundCardView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = 40
+        view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        view.clipsToBounds = false
+        view.layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        view.layer.shadowOpacity = 0.3
+        view.layer.shadowOffset = CGSize(width: 0, height: 3)
+        return view
+    }()
+    
+    var groupNameLabel: UILabel = {
+        
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = label.font.withSize(12)
+        label.textColor = #colorLiteral(red: 0.4078431373, green: 0.1176470588, blue: 0.4392156863, alpha: 1)
+        return label
+    }()
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupView() {}
+    func setupView() {
+        addSubview(backgroundCardView)
+        backgroundCardView.addSubview(groupNameLabel)
+        
+        backgroundCardView.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
+        backgroundCardView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10).isActive = true
+        backgroundCardView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15).isActive = true
+        backgroundCardView.trailingAnchor.constraint(equalTo: trailingAnchor , constant:-15).isActive = true
+        
+        groupNameLabel.leadingAnchor.constraint(equalTo: backgroundCardView.leadingAnchor, constant: 10).isActive = true
+        groupNameLabel.trailingAnchor.constraint(equalTo: backgroundCardView.trailingAnchor, constant: -15).isActive = true
+        groupNameLabel.topAnchor.constraint(equalTo: backgroundCardView.topAnchor, constant: 15).isActive = true
+    }
 }
