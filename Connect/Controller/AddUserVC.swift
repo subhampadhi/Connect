@@ -39,12 +39,36 @@ class AddUserVC: UIViewController , UITableViewDelegate , UITableViewDataSource 
     }()
     
     @objc func addMember() {
-       
+        
         addGroupToUser()
-       
+        addUserToGroup()
     }
     
     func addUserToGroup () {
+        
+        let ref = Database.database().reference()
+        ref.child("Groups").child(groupId!).observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            guard let value = snapshot.value else { return }
+            
+            do {
+                let model = try FirebaseDecoder().decode(Groups.self, from: value)
+                var members = model.Members
+                if members == nil {
+                    var memberArray = [String]()
+                    memberArray.append(self.selectedKey)
+                    print(memberArray)
+                    ref.child("Groups").child(self.groupId!).updateChildValues(["Members" : memberArray])
+                }else {
+                    members?.append(self.selectedKey)
+                    ref.child("Groups").child(self.groupId!).updateChildValues(["Members" : members])
+                }
+            } catch let error {
+                print(error)
+            }
+        }) { (error) in
+            print(error.localizedDescription)
+        }
         
     }
     
@@ -66,7 +90,6 @@ class AddUserVC: UIViewController , UITableViewDelegate , UITableViewDataSource 
                     groups?.append(self.groupId!)
                     ref.child("users").child(self.selectedKey).updateChildValues(["groups" : groups])
                     print("Saved user into db")
-                    self.navigationController?.popViewController(animated: true)
                 }
             } catch let error {
                 print(error)

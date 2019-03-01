@@ -8,11 +8,6 @@
 
 import Foundation
 
-struct AllGroups : Codable {
-    
-    var groups : [Groups]?
-}
-
 struct Groups: Codable {
     
     var Description : String?
