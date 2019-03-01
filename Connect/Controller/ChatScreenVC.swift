@@ -27,10 +27,10 @@ class ChatScreenVC: UIViewController, UITextFieldDelegate , UITableViewDelegate 
         return textField
     }()
     
-    var messagesTable: UITableView = {
+    var chatTable: UITableView = {
         let view = UITableView()
-        view.separatorStyle = .none
-        view.backgroundColor = #colorLiteral(red: 0.9607843137, green: 0.9607843137, blue: 0.9607843137, alpha: 1)
+//        view.separatorStyle = .none
+        view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -55,23 +55,46 @@ class ChatScreenVC: UIViewController, UITextFieldDelegate , UITableViewDelegate 
                 self.allMessages.append(model)
                 print(self.allMessages.count)
                 self.isReady = true
-                
+                DispatchQueue.main.async {
+                    self.chatTable.reloadData()
+                    self.scrollToBottom()
+                }
             } catch let error {
                 print(error)
             }
         }, withCancel: nil)
     }
     
+    func scrollToBottom(){
+        DispatchQueue.main.async {
+            let indexPath = IndexPath(row: self.allMessages.count-1, section: 0)
+            self.chatTable.scrollToRow(at: indexPath, at: .bottom, animated: true)
+        }
+    }
+
     func setupInputComponents() {
         let containerView = UIView()
         containerView.translatesAutoresizingMaskIntoConstraints = false
         
+        chatTable.dataSource = self
+        chatTable.delegate = self
+        
         view.addSubview(containerView)
+        view.addSubview(chatTable)
+        
+        chatTable.register(IncommingChatMessageCell.self, forCellReuseIdentifier: "incommingChatMessageCell")
+        chatTable.register(OutgoingChatMessageCell.self, forCellReuseIdentifier: "outgoingChatMessageCell")
+        
         
         containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         containerView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         containerView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        chatTable.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        chatTable.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        chatTable.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        chatTable.bottomAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
         
         let sendButton = UIButton(type: .system)
         sendButton.setTitle("Send", for: UIControl.State())
@@ -142,8 +165,31 @@ class ChatScreenVC: UIViewController, UITextFieldDelegate , UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+        let userID = Auth.auth().currentUser?.uid
+        if allMessages[indexPath.row].uid == userID {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "outgoingChatMessageCell") as! OutgoingChatMessageCell
+            
+            let message = allMessages[indexPath.row]
+            cell.senderNameLabel.text = message.sender_name
+            cell.timeLabel.text = message.date
+            cell.messageText.text = message.text
+            return cell
+        }else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "incommingChatMessageCell") as! IncommingChatMessageCell
+            
+            let message = allMessages[indexPath.row]
+            cell.senderNameLabel.text = message.sender_name
+            cell.timeLabel.text = message.date
+            cell.messageText.text = message.text
+            return cell
+        }
     }
     
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        var frame = tableView.frame.width * 0.75
+        frame = frame - 30
+        let size = Utils.calculateTextHeightForTableView(approxWidth: frame, string: allMessages[indexPath.row].text ?? "", fontName: UIFont.systemFont(ofSize: 14).fontName, fontSize: 14)
+        print(size)
+        return size + 150
+    }
 }

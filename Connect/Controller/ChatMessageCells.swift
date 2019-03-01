@@ -141,6 +141,7 @@ class OutgoingChatMessageCell : UITableViewCell {
     
     var messageText: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Hello this is a test message for you"
         label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
