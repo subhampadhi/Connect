@@ -21,19 +21,19 @@ class TabBarController: UITabBarController {
         //let layout = UICollectionViewFlowLayout()
         let messagesViewController = MessagesViewController()
         let recentGroupsNavController = UINavigationController(rootViewController: messagesViewController)
-        recentGroupsNavController.tabBarItem.title = "Engage"
+        recentGroupsNavController.tabBarItem.title = "Messages"
       //  recentGroupsNavController.tabBarItem.image = #imageLiteral(resourceName: "class")
         
         
         let searchViewController = SearchViewController()
         let searchNavController = UINavigationController(rootViewController: searchViewController)
-        searchNavController.tabBarItem.title = "Calendar"
+        searchNavController.tabBarItem.title = "Search"
       //  calenderNavController.tabBarItem.image = #imageLiteral(resourceName: "calendar-1")
         
         
         let settingsViewController = SettingsViewController()
         let settingsNavController = UINavigationController(rootViewController: settingsViewController)
-        settingsNavController.tabBarItem.title = "Wisdom"
+        settingsNavController.tabBarItem.title = "Setting"
       //  wisdomNavController.tabBarItem.image = #imageLiteral(resourceName: "discover")
         
         

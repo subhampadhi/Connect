@@ -217,7 +217,7 @@ class SignupVC: UIViewController , UITextFieldDelegate {
                 print(error)
                 return
             }else {
-                let ref = Database.database().reference(fromURL: "https://connect-4822f.firebaseio.com/")
+                let ref = Database.database().reference()
         
                 guard let userID = Auth.auth().currentUser?.uid else {return}
 

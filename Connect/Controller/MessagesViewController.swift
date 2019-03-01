@@ -238,11 +238,19 @@ class MessagesCell: UITableViewCell{
         return view
     }()
     
+    var groupImage : UIImageView = {
+        let view = UIImageView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = #colorLiteral(red: 0.4078431373, green: 0.1176470588, blue: 0.4392156863, alpha: 1)
+        view.layer.cornerRadius = 35
+        return view
+    }()
+    
     var groupNameLabel: UILabel = {
         
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = label.font.withSize(12)
+        label.font = label.font.withSize(20)
         label.textColor = #colorLiteral(red: 0.4078431373, green: 0.1176470588, blue: 0.4392156863, alpha: 1)
         return label
     }()
@@ -255,14 +263,21 @@ class MessagesCell: UITableViewCell{
     func setupView() {
         addSubview(backgroundCardView)
         backgroundCardView.addSubview(groupNameLabel)
+        backgroundCardView.addSubview(groupImage)
+        
+        
         
         backgroundCardView.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
         backgroundCardView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10).isActive = true
         backgroundCardView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15).isActive = true
         backgroundCardView.trailingAnchor.constraint(equalTo: trailingAnchor , constant:-15).isActive = true
         
-        groupNameLabel.leadingAnchor.constraint(equalTo: backgroundCardView.leadingAnchor, constant: 10).isActive = true
-        groupNameLabel.trailingAnchor.constraint(equalTo: backgroundCardView.trailingAnchor, constant: -15).isActive = true
+        groupImage.leadingAnchor.constraint(equalTo: backgroundCardView.leadingAnchor, constant: 5).isActive = true
+        groupImage.centerYAnchor.constraint(equalTo: backgroundCardView.centerYAnchor).isActive = true
+        groupImage.heightAnchor.constraint(equalToConstant: 70).isActive = true
+        groupImage.widthAnchor.constraint(equalToConstant: 70).isActive = true
+        
+        groupNameLabel.centerXAnchor.constraint(equalTo: backgroundCardView.centerXAnchor).isActive = true
         groupNameLabel.topAnchor.constraint(equalTo: backgroundCardView.topAnchor, constant: 15).isActive = true
     }
 }

@@ -29,7 +29,7 @@ class ChatScreenVC: UIViewController, UITextFieldDelegate , UITableViewDelegate 
     
     var chatTable: UITableView = {
         let view = UITableView()
-//        view.separatorStyle = .none
+        view.separatorStyle = .none
         view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -37,6 +37,12 @@ class ChatScreenVC: UIViewController, UITextFieldDelegate , UITableViewDelegate 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let addUser = UIBarButtonItem(title: "Add Members", style: .plain, target: self, action: #selector(addUserPressed))
+        if let font = UIFont(name: "Nunito-SemiBold", size: 16) {
+            addUser.setTitleTextAttributes([NSAttributedString.Key.font: font], for: .normal)
+        }
+        self.navigationItem.rightBarButtonItem = addUser
+
         
         navigationItem.title = "\((groupInfo?.Group_Name)!)"
         view.backgroundColor = UIColor.white
@@ -44,6 +50,13 @@ class ChatScreenVC: UIViewController, UITextFieldDelegate , UITableViewDelegate 
         setupInputComponents()
         observeMessages()
     }
+    
+    @objc func addUserPressed() {
+        let vc = AddUserVC()
+         vc.groupId  = self.groupId 
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     
     func observeMessages() {
         
@@ -53,7 +66,6 @@ class ChatScreenVC: UIViewController, UITextFieldDelegate , UITableViewDelegate 
             do {
                 let model = try FirebaseDecoder().decode(Messages.self, from: value)
                 self.allMessages.append(model)
-                print(self.allMessages.count)
                 self.isReady = true
                 DispatchQueue.main.async {
                     self.chatTable.reloadData()
@@ -189,7 +201,6 @@ class ChatScreenVC: UIViewController, UITextFieldDelegate , UITableViewDelegate 
         var frame = tableView.frame.width * 0.75
         frame = frame - 30
         let size = Utils.calculateTextHeightForTableView(approxWidth: frame, string: allMessages[indexPath.row].text ?? "", fontName: UIFont.systemFont(ofSize: 14).fontName, fontSize: 14)
-        print(size)
         return size + 150
     }
 }
