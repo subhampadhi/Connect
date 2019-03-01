@@ -127,7 +127,11 @@ class MessagesViewController: UIViewController , UITableViewDelegate , UITableVi
             return
         } else {
             let vc = ChatScreenVC()
+            vc.userInfo = self.userInfo
             vc.groupInfo = groupInfoArray[indexPath.row - 1]
+            vc.groupId = groupIds![indexPath.row - 1]
+            print(groupIds![indexPath.row - 1])
+            vc.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(vc, animated: true)
         }
     }
