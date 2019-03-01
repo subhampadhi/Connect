@@ -8,6 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		0F086ED522205C980058C201 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0F086ED422205C980058C201 /* GoogleService-Info.plist */; };
+		0F09B6842229B7A20021A505 /* IBMPlexSans-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F09B6752229B7A20021A505 /* IBMPlexSans-SemiBoldItalic.ttf */; };
+		0F09B6852229B7A20021A505 /* IBMPlexSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F09B6762229B7A20021A505 /* IBMPlexSans-Medium.ttf */; };
+		0F09B6862229B7A20021A505 /* IBMPlexSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F09B6772229B7A20021A505 /* IBMPlexSans-SemiBold.ttf */; };
+		0F09B6872229B7A20021A505 /* IBMPlexSans-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F09B6782229B7A20021A505 /* IBMPlexSans-MediumItalic.ttf */; };
+		0F09B6882229B7A20021A505 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0F09B6792229B7A20021A505 /* OFL.txt */; };
+		0F09B6892229B7A20021A505 /* IBMPlexSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F09B67A2229B7A20021A505 /* IBMPlexSans-LightItalic.ttf */; };
+		0F09B68A2229B7A20021A505 /* IBMPlexSans-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F09B67B2229B7A20021A505 /* IBMPlexSans-ExtraLight.ttf */; };
+		0F09B68B2229B7A20021A505 /* IBMPlexSans-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F09B67C2229B7A20021A505 /* IBMPlexSans-Thin.ttf */; };
+		0F09B68C2229B7A20021A505 /* IBMPlexSans-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F09B67D2229B7A20021A505 /* IBMPlexSans-ThinItalic.ttf */; };
+		0F09B68D2229B7A20021A505 /* IBMPlexSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F09B67E2229B7A20021A505 /* IBMPlexSans-BoldItalic.ttf */; };
+		0F09B68E2229B7A20021A505 /* IBMPlexSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F09B67F2229B7A20021A505 /* IBMPlexSans-Light.ttf */; };
+		0F09B68F2229B7A20021A505 /* IBMPlexSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F09B6802229B7A20021A505 /* IBMPlexSans-Italic.ttf */; };
+		0F09B6902229B7A20021A505 /* IBMPlexSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F09B6812229B7A20021A505 /* IBMPlexSans-Regular.ttf */; };
+		0F09B6912229B7A20021A505 /* IBMPlexSans-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F09B6822229B7A20021A505 /* IBMPlexSans-ExtraLightItalic.ttf */; };
+		0F09B6922229B7A20021A505 /* IBMPlexSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F09B6832229B7A20021A505 /* IBMPlexSans-Bold.ttf */; };
 		0F0B10812225949900664D7D /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0B10802225949900664D7D /* TabBarController.swift */; };
 		0F0B10832225950C00664D7D /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0B10822225950C00664D7D /* MessagesViewController.swift */; };
 		0F0B10852225956300664D7D /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0B10842225956300664D7D /* SearchViewController.swift */; };
@@ -54,6 +69,21 @@
 
 /* Begin PBXFileReference section */
 		0F086ED422205C980058C201 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0F09B6752229B7A20021A505 /* IBMPlexSans-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSans-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		0F09B6762229B7A20021A505 /* IBMPlexSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSans-Medium.ttf"; sourceTree = "<group>"; };
+		0F09B6772229B7A20021A505 /* IBMPlexSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSans-SemiBold.ttf"; sourceTree = "<group>"; };
+		0F09B6782229B7A20021A505 /* IBMPlexSans-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSans-MediumItalic.ttf"; sourceTree = "<group>"; };
+		0F09B6792229B7A20021A505 /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
+		0F09B67A2229B7A20021A505 /* IBMPlexSans-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSans-LightItalic.ttf"; sourceTree = "<group>"; };
+		0F09B67B2229B7A20021A505 /* IBMPlexSans-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSans-ExtraLight.ttf"; sourceTree = "<group>"; };
+		0F09B67C2229B7A20021A505 /* IBMPlexSans-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSans-Thin.ttf"; sourceTree = "<group>"; };
+		0F09B67D2229B7A20021A505 /* IBMPlexSans-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSans-ThinItalic.ttf"; sourceTree = "<group>"; };
+		0F09B67E2229B7A20021A505 /* IBMPlexSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSans-BoldItalic.ttf"; sourceTree = "<group>"; };
+		0F09B67F2229B7A20021A505 /* IBMPlexSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSans-Light.ttf"; sourceTree = "<group>"; };
+		0F09B6802229B7A20021A505 /* IBMPlexSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSans-Italic.ttf"; sourceTree = "<group>"; };
+		0F09B6812229B7A20021A505 /* IBMPlexSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSans-Regular.ttf"; sourceTree = "<group>"; };
+		0F09B6822229B7A20021A505 /* IBMPlexSans-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSans-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		0F09B6832229B7A20021A505 /* IBMPlexSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSans-Bold.ttf"; sourceTree = "<group>"; };
 		0F0B10802225949900664D7D /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		0F0B10822225950C00664D7D /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 		0F0B10842225956300664D7D /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -121,6 +151,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F09B6742229B7A20021A505 /* IBM_Plex_Sans */ = {
+			isa = PBXGroup;
+			children = (
+				0F09B6752229B7A20021A505 /* IBMPlexSans-SemiBoldItalic.ttf */,
+				0F09B6762229B7A20021A505 /* IBMPlexSans-Medium.ttf */,
+				0F09B6772229B7A20021A505 /* IBMPlexSans-SemiBold.ttf */,
+				0F09B6782229B7A20021A505 /* IBMPlexSans-MediumItalic.ttf */,
+				0F09B6792229B7A20021A505 /* OFL.txt */,
+				0F09B67A2229B7A20021A505 /* IBMPlexSans-LightItalic.ttf */,
+				0F09B67B2229B7A20021A505 /* IBMPlexSans-ExtraLight.ttf */,
+				0F09B67C2229B7A20021A505 /* IBMPlexSans-Thin.ttf */,
+				0F09B67D2229B7A20021A505 /* IBMPlexSans-ThinItalic.ttf */,
+				0F09B67E2229B7A20021A505 /* IBMPlexSans-BoldItalic.ttf */,
+				0F09B67F2229B7A20021A505 /* IBMPlexSans-Light.ttf */,
+				0F09B6802229B7A20021A505 /* IBMPlexSans-Italic.ttf */,
+				0F09B6812229B7A20021A505 /* IBMPlexSans-Regular.ttf */,
+				0F09B6822229B7A20021A505 /* IBMPlexSans-ExtraLightItalic.ttf */,
+				0F09B6832229B7A20021A505 /* IBMPlexSans-Bold.ttf */,
+			);
+			path = IBM_Plex_Sans;
+			sourceTree = "<group>";
+		};
 		0F0B108A2227211600664D7D /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -156,6 +208,7 @@
 		0F226780221DFEA60052BB21 /* Connect */ = {
 			isa = PBXGroup;
 			children = (
+				0F09B6742229B7A20021A505 /* IBM_Plex_Sans */,
 				0F0B108A2227211600664D7D /* Model */,
 				0F2267B2221E007D0052BB21 /* Controller */,
 				0F226781221DFEA60052BB21 /* AppDelegate.swift */,
@@ -337,9 +390,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F09B6902229B7A20021A505 /* IBMPlexSans-Regular.ttf in Resources */,
+				0F09B68E2229B7A20021A505 /* IBMPlexSans-Light.ttf in Resources */,
+				0F09B6892229B7A20021A505 /* IBMPlexSans-LightItalic.ttf in Resources */,
+				0F09B6852229B7A20021A505 /* IBMPlexSans-Medium.ttf in Resources */,
+				0F09B68C2229B7A20021A505 /* IBMPlexSans-ThinItalic.ttf in Resources */,
+				0F09B6842229B7A20021A505 /* IBMPlexSans-SemiBoldItalic.ttf in Resources */,
+				0F09B6912229B7A20021A505 /* IBMPlexSans-ExtraLightItalic.ttf in Resources */,
+				0F09B68D2229B7A20021A505 /* IBMPlexSans-BoldItalic.ttf in Resources */,
+				0F09B6872229B7A20021A505 /* IBMPlexSans-MediumItalic.ttf in Resources */,
+				0F09B6882229B7A20021A505 /* OFL.txt in Resources */,
+				0F09B6922229B7A20021A505 /* IBMPlexSans-Bold.ttf in Resources */,
+				0F09B68A2229B7A20021A505 /* IBMPlexSans-ExtraLight.ttf in Resources */,
+				0F09B6862229B7A20021A505 /* IBMPlexSans-SemiBold.ttf in Resources */,
 				0F22678F221DFEA80052BB21 /* LaunchScreen.storyboard in Resources */,
+				0F09B68F2229B7A20021A505 /* IBMPlexSans-Italic.ttf in Resources */,
 				0F086ED522205C980058C201 /* GoogleService-Info.plist in Resources */,
 				0F22678C221DFEA80052BB21 /* Assets.xcassets in Resources */,
+				0F09B68B2229B7A20021A505 /* IBMPlexSans-Thin.ttf in Resources */,
 				0F226787221DFEA60052BB21 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -407,6 +475,7 @@
 				"${BUILT_PRODUCTS_DIR}/CodableFirebase/CodableFirebase.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -415,6 +484,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CodableFirebase.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);

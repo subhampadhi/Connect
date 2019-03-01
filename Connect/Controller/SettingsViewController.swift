@@ -14,6 +14,8 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = .white
+        
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
         
         if Auth.auth().currentUser?.uid == nil {
@@ -25,12 +27,13 @@ class SettingsViewController: UIViewController {
         do {
             try Auth.auth().signOut()
             UserDefaults.standard.set(false, forKey: "Login")
+            let vc = LoginVC()
+            present(vc, animated: true, completion: nil)
         }catch let logOutError {
             print(logOutError)
         }
         
-        let vc = LoginVC()
-        present(vc, animated: true, completion: nil)
+        
     }
 }
 

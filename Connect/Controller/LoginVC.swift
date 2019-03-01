@@ -37,7 +37,7 @@ class LoginVC: UIViewController ,UITextFieldDelegate {
     
     let icon:UIImageView = {
         let l = UIImageView()
-        //  l.image = #imageLiteral(resourceName: "logo")
+          l.image = #imageLiteral(resourceName: "ICON")
         l.contentMode = .scaleAspectFit
         l.layer.masksToBounds = true
         l.layer.cornerRadius = 20
@@ -46,8 +46,8 @@ class LoginVC: UIViewController ,UITextFieldDelegate {
     
     let passwordTextField:UITextField = {
         let p = UITextField()
-        p.attributedPlaceholder = NSAttributedString(string: "Password",
-                                                     attributes: [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)])
+        p.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)])
+        p.keyboardType = .emailAddress
         p.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         p.layer.borderWidth = 2
         p.textAlignment = .left
@@ -195,21 +195,22 @@ class LoginVC: UIViewController ,UITextFieldDelegate {
     @objc func loginAction(){
         
         guard let email = emailTextField.text , let password = passwordTextField.text else {
-            print("Issue !!")
+            Utils.showAlert(title:"Oops", message: "Please don't leave any field blank", presenter: self)
             return
         }
         
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
             if error != nil {
-                print(error)
+                Utils.showAlert(title:"Oops", message: "\((error)!)", presenter: self)
             }
             else{
-                print("Login success!")
+                print("Login Success")
                 UserDefaults.standard.set(true, forKey: "Login")
-                self.dismiss(animated: true, completion: {
-                    let controller = TabBarController()
-                    self.navigationController?.pushViewController(controller, animated: true)
-                })
+                let controller = TabBarController()
+                guard let window = UIApplication.shared.keyWindow else {
+                    return
+                }
+                window.rootViewController = controller
             }
         }
     }

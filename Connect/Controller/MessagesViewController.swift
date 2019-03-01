@@ -176,7 +176,7 @@ class HeaderCell: UITableViewCell{
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Messages"
-        label.font = label.font.withSize(50)
+        label.font = UIFont(name: "IBMPlexSans-Light", size: 50)
         label.textColor = #colorLiteral(red: 0.4078431373, green: 0.1176470588, blue: 0.4392156863, alpha: 1)
         return label
     }()
@@ -250,7 +250,7 @@ class MessagesCell: UITableViewCell{
         
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = label.font.withSize(20)
+        label.font = UIFont(name: "IBMPlexSans-SemiBoldItalic", size: 16)
         label.textColor = #colorLiteral(red: 0.4078431373, green: 0.1176470588, blue: 0.4392156863, alpha: 1)
         return label
     }()

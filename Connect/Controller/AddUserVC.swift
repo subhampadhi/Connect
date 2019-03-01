@@ -69,6 +69,9 @@ class AddUserVC: UIViewController , UITableViewDelegate , UITableViewDataSource 
         }) { (error) in
             print(error.localizedDescription)
         }
+        DispatchQueue.main.async {
+            self.navigationController?.popViewController(animated: true)
+        }
         
     }
     

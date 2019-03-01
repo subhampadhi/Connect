@@ -9,13 +9,8 @@
 import Foundation
 import UIKit
 
-
-
-
 class IncommingChatMessageCell: UITableViewCell {
    
-    
-    
     var profileImage: UIImageView = {
         let view = UIImageView()
         view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
@@ -38,14 +33,16 @@ class IncommingChatMessageCell: UITableViewCell {
     var timeLabel : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "IBMPlexSans-SemiBoldItalic", size: 16)
         label.text = "9:30 AM"
-        label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        label.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         return label
     }()
     
     var senderNameLabel : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "IBMPlexSans-SemiBoldItalic", size: 18)
         label.text = "Subham Padhi"
         label.textColor = #colorLiteral(red: 0.4078431373, green: 0.1176470588, blue: 0.4392156863, alpha: 1)
         return label
@@ -53,6 +50,8 @@ class IncommingChatMessageCell: UITableViewCell {
     
     var messageText: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 0
+        label.font = UIFont(name: "IBMPlexSans-Light", size: 18)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Hello this is a test message for you"
         label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
@@ -63,7 +62,6 @@ class IncommingChatMessageCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setUpView()
-        
     }
     
     func setUpView() {
@@ -119,23 +117,26 @@ class OutgoingChatMessageCell : UITableViewCell {
         let view =  UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = 5
-        view.backgroundColor = #colorLiteral(red: 0.9607843137, green: 0.9607843137, blue: 0.9607843137, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1)
         return view
     }()
     
     var timeLabel : UILabel = {
+       
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "IBMPlexSans-SemiBoldItalic", size: 16)
         label.text = "9:30 AM"
-        label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        label.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         return label
     }()
     
     var senderNameLabel : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "IBMPlexSans-SemiBoldItalic", size: 18)
         label.text = "Subham Padhi"
-        label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        label.textColor = #colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1)
         return label
     }()
     
@@ -143,8 +144,9 @@ class OutgoingChatMessageCell : UITableViewCell {
         let label = UILabel()
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "IBMPlexSans-Light", size: 18)
         label.text = "Hello this is a test message for you"
-        label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        label.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         return label
     }()
     
@@ -152,7 +154,6 @@ class OutgoingChatMessageCell : UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setUpView()
-        
     }
     
     func setUpView() {

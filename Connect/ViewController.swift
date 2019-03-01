@@ -20,7 +20,6 @@ class ViewController: UIViewController {
     }
     
     @objc func handleLogout() {
-        
         do {
             try Auth.auth().signOut()
         }catch let logOutError {

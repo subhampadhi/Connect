@@ -30,7 +30,7 @@ class ChatScreenVC: UIViewController, UITextFieldDelegate , UITableViewDelegate 
     var chatTable: UITableView = {
         let view = UITableView()
         view.separatorStyle = .none
-        view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -99,7 +99,7 @@ class ChatScreenVC: UIViewController, UITextFieldDelegate , UITableViewDelegate 
         
         
         containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        containerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         containerView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         containerView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
@@ -141,7 +141,9 @@ class ChatScreenVC: UIViewController, UITextFieldDelegate , UITableViewDelegate 
     }
     
     @objc func handleSend() {
-        
+        if self.inputTextField.text == "" {
+            return
+        }
         guard let message = inputTextField.text else {
             return
         }
@@ -150,7 +152,13 @@ class ChatScreenVC: UIViewController, UITextFieldDelegate , UITableViewDelegate 
         let childRef = ref.childByAutoId()
         guard let userID = Auth.auth().currentUser?.uid else {return}
         let values = ["text": message, "sender_name": "\((userInfo?.name)!)" , "uid": userID , "date" : getDateTime()]
-        childRef.updateChildValues(values)
+        childRef.updateChildValues(values) { (error, childRef) in
+            if error != nil {
+                Utils.showAlert(title: "oops!", message: "\((error!))", presenter: self)
+            }
+            self.inputTextField.text = ""
+        }
+       
     }
     
     func getDateTime() -> String {
@@ -200,7 +208,7 @@ class ChatScreenVC: UIViewController, UITextFieldDelegate , UITableViewDelegate 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         var frame = tableView.frame.width * 0.75
         frame = frame - 30
-        let size = Utils.calculateTextHeightForTableView(approxWidth: frame, string: allMessages[indexPath.row].text ?? "", fontName: UIFont.systemFont(ofSize: 14).fontName, fontSize: 14)
+        let size = Utils.calculateTextHeightForTableView(approxWidth: frame, string: allMessages[indexPath.row].text ?? "", fontName: "IBMPlexSans-Light", fontSize: 18)
         return size + 150
     }
 }

@@ -229,6 +229,7 @@ class SignupVC: UIViewController , UITextFieldDelegate {
                         print(err)
                         return
                     }else {
+                        self.dismiss(animated: true, completion: nil)
                         print("Saved user into db")
                     }
                     
