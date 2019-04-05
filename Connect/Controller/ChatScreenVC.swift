@@ -83,6 +83,24 @@ class ChatScreenVC: UIViewController, UITextFieldDelegate , UITableViewDelegate 
             self.chatTable.scrollToRow(at: indexPath, at: .bottom, animated: true)
         }
     }
+    
+    var sendButton: UIButton = {
+        
+        let sendButton = UIButton(type: .system)
+        sendButton.setTitle("Send", for: UIControl.State())
+        sendButton.translatesAutoresizingMaskIntoConstraints = false
+        sendButton.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
+        return sendButton
+    }()
+    
+    var addActionButton: UIButton = {
+        
+        let sendButton = UIButton(type: .system)
+        sendButton.setTitle("+", for: UIControl.State())
+        sendButton.translatesAutoresizingMaskIntoConstraints = false
+        sendButton.addTarget(self, action: #selector(addAction), for: .touchUpInside)
+        return sendButton
+    }()
 
     func setupInputComponents() {
         let containerView = UIView()
@@ -108,24 +126,24 @@ class ChatScreenVC: UIViewController, UITextFieldDelegate , UITableViewDelegate 
         chatTable.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         chatTable.bottomAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
         
-        let sendButton = UIButton(type: .system)
-        sendButton.setTitle("Send", for: UIControl.State())
-        sendButton.translatesAutoresizingMaskIntoConstraints = false
-        sendButton.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
         containerView.addSubview(sendButton)
+        containerView.addSubview(addActionButton)
         
-        
-        sendButton.rightAnchor.constraint(equalTo: containerView.rightAnchor).isActive = true
+        sendButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
         sendButton.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
-        sendButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
-        sendButton.heightAnchor.constraint(equalTo: containerView.heightAnchor).isActive = true
+        sendButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        sendButton.heightAnchor.constraint(equalToConstant:50).isActive = true
+        
+        addActionButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
+        addActionButton.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
+        addActionButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        addActionButton.heightAnchor.constraint(equalToConstant:80).isActive = true
         
         containerView.addSubview(inputTextField)
         
-        
-        inputTextField.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: 8).isActive = true
+        inputTextField.leadingAnchor.constraint(equalTo: addActionButton.trailingAnchor).isActive = true
         inputTextField.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
-        inputTextField.rightAnchor.constraint(equalTo: sendButton.leftAnchor).isActive = true
+        inputTextField.trailingAnchor.constraint(equalTo: sendButton.trailingAnchor).isActive = true
         inputTextField.heightAnchor.constraint(equalTo: containerView.heightAnchor).isActive = true
         
         let separatorLineView = UIView()
@@ -133,12 +151,51 @@ class ChatScreenVC: UIViewController, UITextFieldDelegate , UITableViewDelegate 
         separatorLineView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(separatorLineView)
         
-        
         separatorLineView.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
         separatorLineView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
         separatorLineView.widthAnchor.constraint(equalTo: containerView.widthAnchor).isActive = true
         separatorLineView.heightAnchor.constraint(equalToConstant: 1).isActive = true
     }
+    
+    @objc func addAction() {
+        let actionSheet = UIAlertController(title: "Modules", message: "Choose from the list of modules", preferredStyle: .actionSheet)
+        
+        if groupInfo?.Notes == "False" || groupInfo?.Notes == nil {
+            
+            actionSheet.addAction(UIAlertAction(title: "Create Notes", style: .default, handler: { (action: UIAlertAction) in
+                self.CreateNotes()
+            }))
+        } else {
+            actionSheet.addAction(UIAlertAction(title: "View Notes", style: .default, handler: { (action: UIAlertAction) in
+                self.CreateNotes()
+            }))
+        }
+        
+        if groupInfo?.TodoList == "False" || groupInfo?.TodoList == nil  {
+            
+            
+            actionSheet.addAction(UIAlertAction(title: "Create To Do List", style: .default, handler: { (action: UIAlertAction) in
+                self.CreateToDoList()
+            }))
+        }else {
+            
+            actionSheet.addAction(UIAlertAction(title: "To Do List", style: .default, handler: { (action: UIAlertAction) in
+                self.CreateToDoList()
+            }))
+        }
+        
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(actionSheet, animated: true, completion: nil)
+    }
+    
+    func CreateToDoList () {
+        print("pressed")
+        let vc = ToDoListVC()
+        vc.groupId = self.groupId
+        vc.isTodoCreated = false
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    func CreateNotes() {}
     
     @objc func handleSend() {
         if self.inputTextField.text == "" {

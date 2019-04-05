@@ -45,6 +45,9 @@
 		0F2267A5221DFEA80052BB21 /* ConnectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2267A4221DFEA80052BB21 /* ConnectUITests.swift */; };
 		0F2267B4221E00A20052BB21 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2267B3221E00A20052BB21 /* LoginVC.swift */; };
 		0F2267B6221E7A230052BB21 /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2267B5221E7A230052BB21 /* SignupVC.swift */; };
+		0F4D661E225722630071EE94 /* ToDoListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4D661D225722620071EE94 /* ToDoListVC.swift */; };
+		0F4D66212257885A0071EE94 /* ToDoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4D66202257885A0071EE94 /* ToDoModel.swift */; };
+		0F5372532244DCD50011683C /* NotesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5372522244DCD50011683C /* NotesVC.swift */; };
 		59B681D9C6D3006861796F43 /* Pods_ConnectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 549BB64619CC9F0AD80291E2 /* Pods_ConnectTests.framework */; };
 		86AFF189E2EAF7A80212E904 /* Pods_Connect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30C27C8E481DAA0D9A7DD6AD /* Pods_Connect.framework */; };
 		D766F82E8B15FAB0E58CDA78 /* Pods_ConnectUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE87AA7F2A6F5E3733587D6C /* Pods_ConnectUITests.framework */; };
@@ -112,6 +115,9 @@
 		0F2267A6221DFEA80052BB21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0F2267B3221E00A20052BB21 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		0F2267B5221E7A230052BB21 /* SignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
+		0F4D661D225722620071EE94 /* ToDoListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListVC.swift; sourceTree = "<group>"; };
+		0F4D66202257885A0071EE94 /* ToDoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoModel.swift; sourceTree = "<group>"; };
+		0F5372522244DCD50011683C /* NotesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesVC.swift; sourceTree = "<group>"; };
 		30C27C8E481DAA0D9A7DD6AD /* Pods_Connect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Connect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		51CB5E7B8B7EDD6A7B3C7B21 /* Pods-Connect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Connect.release.xcconfig"; path = "Pods/Target Support Files/Pods-Connect/Pods-Connect.release.xcconfig"; sourceTree = "<group>"; };
 		53246C6DF1B52BD4E303172B /* Pods-ConnectUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConnectUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ConnectUITests/Pods-ConnectUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -179,6 +185,7 @@
 				0F0B108B2227214600664D7D /* UserModel.swift */,
 				0F1203D72227C96400BA0DAC /* GroupsModel.swift */,
 				0F1203DF222912F900BA0DAC /* MessagesModel.swift */,
+				0F4D66202257885A0071EE94 /* ToDoModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -245,6 +252,7 @@
 		0F2267B2221E007D0052BB21 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				0F4D661F225723C50071EE94 /* ToDoList */,
 				0F1203D9222822D600BA0DAC /* AddUserVC.swift */,
 				0F1203DB2228405D00BA0DAC /* ChatMessageCells.swift */,
 				0F0B10882225EA6500664D7D /* CreateGroupVC.swift */,
@@ -255,8 +263,17 @@
 				0F0B10862225957100664D7D /* SettingsViewController.swift */,
 				0F2267B5221E7A230052BB21 /* SignupVC.swift */,
 				0F0B10802225949900664D7D /* TabBarController.swift */,
+				0F5372522244DCD50011683C /* NotesVC.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		0F4D661F225723C50071EE94 /* ToDoList */ = {
+			isa = PBXGroup;
+			children = (
+				0F4D661D225722620071EE94 /* ToDoListVC.swift */,
+			);
+			path = ToDoList;
 			sourceTree = "<group>";
 		};
 		28B0E2B67E6152A605E55A39 /* Pods */ = {
@@ -528,11 +545,14 @@
 				0F1203E0222912F900BA0DAC /* MessagesModel.swift in Sources */,
 				0F2267B4221E00A20052BB21 /* LoginVC.swift in Sources */,
 				0F1203E22229246800BA0DAC /* Utils.swift in Sources */,
+				0F5372532244DCD50011683C /* NotesVC.swift in Sources */,
 				0F22678A221DFEA60052BB21 /* Connect.xcdatamodeld in Sources */,
 				0F1203DA222822D600BA0DAC /* AddUserVC.swift in Sources */,
+				0F4D661E225722630071EE94 /* ToDoListVC.swift in Sources */,
 				0F1203D82227C96400BA0DAC /* GroupsModel.swift in Sources */,
 				0F0B10872225957100664D7D /* SettingsViewController.swift in Sources */,
 				0F1203DE222864CE00BA0DAC /* ChatScreenVC.swift in Sources */,
+				0F4D66212257885A0071EE94 /* ToDoModel.swift in Sources */,
 				0F0B108C2227214600664D7D /* UserModel.swift in Sources */,
 				0F1203DC2228405D00BA0DAC /* ChatMessageCells.swift in Sources */,
 			);

@@ -13,4 +13,6 @@ struct Groups: Codable {
     var Description : String?
     var Group_Name : String?
     var Members: [String]?
+    var Notes : String?
+    var TodoList : String?
 }

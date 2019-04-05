@@ -88,7 +88,7 @@ class CreateGroupVC: UIViewController {
         let groupRefrence = ref.child("Groups").childByAutoId()
         let groupId = groupRefrence.key
         
-        let values = ["Group_Name":groupName , "Description": groupInfoText , "Members":["\(userID)"]] as [String : Any]
+        let values = ["Group_Name":groupName , "Description": groupInfoText , "Members":["\(userID)"] , "ToDoList" : "False" , "Notes": "False"] as [String : Any]
         groupRefrence.updateChildValues(values, withCompletionBlock: { (err, ref) in
             
             if err != nil {

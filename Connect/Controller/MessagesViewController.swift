@@ -26,6 +26,7 @@ class MessagesViewController: UIViewController , UITableViewDelegate , UITableVi
         findGroupsForUser()
     }
     
+   
      var messagesTable: UITableView = {
         let view = UITableView()
         view.separatorStyle = .none
