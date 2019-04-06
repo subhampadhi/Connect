@@ -190,6 +190,8 @@ class ToDoListVC : UIViewController , UITableViewDelegate , UITableViewDataSourc
                 Utils.showAlert(title: "oops!", message: "\((error!))", presenter: self)
             }
         }
+        let reference = Database.database().reference().child("Groups").child(groupId!)
+        reference.updateChildValues(["ToDoList": "true"])
     }
     
     func getDateTime() -> String {

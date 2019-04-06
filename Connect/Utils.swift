@@ -18,6 +18,16 @@ open class Utils {
         return estimatedFrame.height
     }
     
+    static func getDateTime() -> String {
+        let currentDateTime = Date()
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
+        formatter.dateStyle = .short
+        let dateTime = formatter.string(from: currentDateTime)
+        return dateTime
+        
+    }
+    
     static func calculateTextHeightForTableView(approxWidth: CGFloat, approxWidth2: CGFloat, string: String, string2: String, fontName: String, fontName2: String, fontSize: CGFloat, fontSize2: CGFloat) -> CGFloat {
         let size = CGSize(width: approxWidth, height: 400)
         let size2 = CGSize(width: approxWidth2, height: 400)

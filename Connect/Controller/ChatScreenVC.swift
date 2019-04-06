@@ -96,8 +96,9 @@ class ChatScreenVC: UIViewController, UITextFieldDelegate , UITableViewDelegate 
     var addActionButton: UIButton = {
         
         let sendButton = UIButton(type: .system)
-        sendButton.setTitle("+", for: UIControl.State())
+        sendButton.setImage(#imageLiteral(resourceName: "Add"), for: .normal)
         sendButton.translatesAutoresizingMaskIntoConstraints = false
+        sendButton.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         sendButton.addTarget(self, action: #selector(addAction), for: .touchUpInside)
         return sendButton
     }()
@@ -133,6 +134,7 @@ class ChatScreenVC: UIViewController, UITextFieldDelegate , UITableViewDelegate 
         sendButton.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
         sendButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
         sendButton.heightAnchor.constraint(equalToConstant:50).isActive = true
+
         
         addActionButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
         addActionButton.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
@@ -160,8 +162,7 @@ class ChatScreenVC: UIViewController, UITextFieldDelegate , UITableViewDelegate 
     @objc func addAction() {
         let actionSheet = UIAlertController(title: "Modules", message: "Choose from the list of modules", preferredStyle: .actionSheet)
         
-        if groupInfo?.Notes == "False" || groupInfo?.Notes == nil {
-            
+        if groupInfo?.Notes == "false" || groupInfo?.Notes == nil  {
             actionSheet.addAction(UIAlertAction(title: "Create Notes", style: .default, handler: { (action: UIAlertAction) in
                 self.CreateNotes()
             }))
@@ -171,8 +172,8 @@ class ChatScreenVC: UIViewController, UITextFieldDelegate , UITableViewDelegate 
             }))
         }
         
-        if groupInfo?.TodoList == "False" || groupInfo?.TodoList == nil  {
-            
+        if groupInfo?.TodoList == "false" || groupInfo?.TodoList == nil  {
+           
             
             actionSheet.addAction(UIAlertAction(title: "Create To Do List", style: .default, handler: { (action: UIAlertAction) in
                 self.CreateToDoList()
@@ -195,7 +196,11 @@ class ChatScreenVC: UIViewController, UITextFieldDelegate , UITableViewDelegate 
         vc.isTodoCreated = false
         navigationController?.pushViewController(vc, animated: true)
     }
-    func CreateNotes() {}
+    func CreateNotes() {
+        let vc = NotesTableVC()
+        vc.groupId = self.groupId
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     
     @objc func handleSend() {
         if self.inputTextField.text == "" {
