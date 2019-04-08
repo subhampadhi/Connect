@@ -50,6 +50,7 @@
 		0F4D662622589C8C0071EE94 /* NotesTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4D662522589C8C0071EE94 /* NotesTableVC.swift */; };
 		0F4D662822589DB30071EE94 /* NotesScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4D662722589DB30071EE94 /* NotesScreenVC.swift */; };
 		0F4D662D2258BDA00071EE94 /* NotesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4D662C2258BDA00071EE94 /* NotesModel.swift */; };
+		0F4D6633225B990A0071EE94 /* JoinGroupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4D6632225B990A0071EE94 /* JoinGroupVC.swift */; };
 		0F5372532244DCD50011683C /* NotesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5372522244DCD50011683C /* NotesVC.swift */; };
 		59B681D9C6D3006861796F43 /* Pods_ConnectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 549BB64619CC9F0AD80291E2 /* Pods_ConnectTests.framework */; };
 		86AFF189E2EAF7A80212E904 /* Pods_Connect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30C27C8E481DAA0D9A7DD6AD /* Pods_Connect.framework */; };
@@ -123,6 +124,7 @@
 		0F4D662522589C8C0071EE94 /* NotesTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTableVC.swift; sourceTree = "<group>"; };
 		0F4D662722589DB30071EE94 /* NotesScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesScreenVC.swift; sourceTree = "<group>"; };
 		0F4D662C2258BDA00071EE94 /* NotesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesModel.swift; sourceTree = "<group>"; };
+		0F4D6632225B990A0071EE94 /* JoinGroupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinGroupVC.swift; sourceTree = "<group>"; };
 		0F5372522244DCD50011683C /* NotesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesVC.swift; sourceTree = "<group>"; };
 		30C27C8E481DAA0D9A7DD6AD /* Pods_Connect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Connect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		51CB5E7B8B7EDD6A7B3C7B21 /* Pods-Connect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Connect.release.xcconfig"; path = "Pods/Target Support Files/Pods-Connect/Pods-Connect.release.xcconfig"; sourceTree = "<group>"; };
@@ -259,10 +261,9 @@
 		0F2267B2221E007D0052BB21 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				0F4D662E225930290071EE94 /* New Group */,
 				0F4D662422589C780071EE94 /* Notes */,
 				0F1203D9222822D600BA0DAC /* AddUserVC.swift */,
-				0F1203DB2228405D00BA0DAC /* ChatMessageCells.swift */,
-				0F1203DD222864CE00BA0DAC /* ChatScreenVC.swift */,
 				0F0B10882225EA6500664D7D /* CreateGroupVC.swift */,
 				0F2267B3221E00A20052BB21 /* LoginVC.swift */,
 				0F0B10822225950C00664D7D /* MessagesViewController.swift */,
@@ -272,6 +273,7 @@
 				0F2267B5221E7A230052BB21 /* SignupVC.swift */,
 				0F0B10802225949900664D7D /* TabBarController.swift */,
 				0F4D661F225723C50071EE94 /* ToDoList */,
+				0F4D6632225B990A0071EE94 /* JoinGroupVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -291,6 +293,15 @@
 				0F4D662722589DB30071EE94 /* NotesScreenVC.swift */,
 			);
 			path = Notes;
+			sourceTree = "<group>";
+		};
+		0F4D662E225930290071EE94 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				0F1203DD222864CE00BA0DAC /* ChatScreenVC.swift */,
+				0F1203DB2228405D00BA0DAC /* ChatMessageCells.swift */,
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		28B0E2B67E6152A605E55A39 /* Pods */ = {
@@ -554,6 +565,7 @@
 			files = (
 				0F4D662822589DB30071EE94 /* NotesScreenVC.swift in Sources */,
 				0F226784221DFEA60052BB21 /* ViewController.swift in Sources */,
+				0F4D6633225B990A0071EE94 /* JoinGroupVC.swift in Sources */,
 				0F0B10832225950C00664D7D /* MessagesViewController.swift in Sources */,
 				0F0B10852225956300664D7D /* SearchViewController.swift in Sources */,
 				0F2267B6221E7A230052BB21 /* SignupVC.swift in Sources */,

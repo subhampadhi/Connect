@@ -14,6 +14,7 @@ import CodableFirebase
 class CreateGroupVC: UIViewController {
     
     var groupArrayValues : [String]?
+    var isPrivateGroup = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +53,16 @@ class CreateGroupVC: UIViewController {
         return label
     }()
     
+    var privacyLabel: UILabel = {
+        
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Make the group private"
+        label.textColor = #colorLiteral(red: 0.4078431373, green: 0.1176470588, blue: 0.4392156863, alpha: 1)
+        label.font = label.font.withSize(20)
+        return label
+    }()
+    
     var groupInfoText: UITextField = {
         let nameText = UITextField()
         nameText.translatesAutoresizingMaskIntoConstraints = false
@@ -63,6 +74,24 @@ class CreateGroupVC: UIViewController {
         
         return nameText
     }()
+    
+    var groupPrivacySwitch : UISwitch = {
+        
+        let view = UISwitch()
+        view.setOn(false, animated: true)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.addTarget(self, action: #selector(CreateGroupVC.switchValueDidChange), for: .valueChanged)
+        return view
+    }()
+    
+    @objc func switchValueDidChange(groupPrivacySwitch: UISwitch) {
+        if groupPrivacySwitch.isOn {
+            self.isPrivateGroup = true
+            
+        } else {
+            self.isPrivateGroup = false
+        }
+    }
     
     var createButton: UIButton = {
         let button = UIButton()
@@ -88,7 +117,7 @@ class CreateGroupVC: UIViewController {
         let groupRefrence = ref.child("Groups").childByAutoId()
         let groupId = groupRefrence.key
         
-        let values = ["Group_Name":groupName , "Description": groupInfoText , "Members":["\(userID)"] , "ToDoList" : "False" , "Notes": "False"] as [String : Any]
+        let values = ["Group_Name":groupName , "Description": groupInfoText , "Members":["\(userID)"] , "ToDoList" : "False" , "Notes": "False" , "PrivateGroup":"\(self.isPrivateGroup)"] as [String : Any]
         groupRefrence.updateChildValues(values, withCompletionBlock: { (err, ref) in
             
             if err != nil {
@@ -131,6 +160,8 @@ class CreateGroupVC: UIViewController {
         view.addSubview(groupNameText)
         view.addSubview(groupInfoLabel)
         view.addSubview(groupInfoText)
+        view.addSubview(groupPrivacySwitch)
+        view.addSubview(privacyLabel)
         
         groupNameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
         groupNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant:15).isActive = true
@@ -148,7 +179,11 @@ class CreateGroupVC: UIViewController {
         groupInfoText.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant:-15).isActive = true
         groupInfoText.topAnchor.constraint(equalTo: groupInfoLabel.bottomAnchor, constant: 10).isActive = true
         
-        
+        groupPrivacySwitch.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
+        groupPrivacySwitch.topAnchor.constraint(equalTo: groupInfoText.bottomAnchor, constant: 70).isActive = true
+       
+        privacyLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
+        privacyLabel.topAnchor.constraint(equalTo: groupPrivacySwitch.topAnchor).isActive = true
         
         if #available(iOS 11.0, *) {
             createButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
