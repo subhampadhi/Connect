@@ -22,10 +22,16 @@ class MessagesViewController: UIViewController , UITableViewDelegate , UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 0.9607843137, green: 0.9607843137, blue: 0.9607843137, alpha: 1)
-        setUpViews()
-        findGroupsForUser()
+        
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(false)
+        isReady = false
+        groupIds?.removeAll()
+        groupInfoArray.removeAll()
+        findGroupsForUser()
+    }
    
      var messagesTable: UITableView = {
         let view = UITableView()
@@ -69,6 +75,7 @@ class MessagesViewController: UIViewController , UITableViewDelegate , UITableVi
                     self.groupInfoArray.append(model)
                     self.isReady = true
                     DispatchQueue.main.async {
+                        self.setUpViews()
                         self.messagesTable.reloadData()
                     }
                 } catch let error {
@@ -138,28 +145,30 @@ class MessagesViewController: UIViewController , UITableViewDelegate , UITableVi
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        if isReady {
         if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell") as! HeaderCell
-            cell.selectionStyle = .none
-            cell.addItem = {
-                () in
-              //  let vc = CreateGroupVC()
-                let vc = CreateGroupVC()
-                vc.hidesBottomBarWhenPushed = true
-                self.navigationController?.pushViewController(vc, animated: true)
+                let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell") as! HeaderCell
+                cell.selectionStyle = .none
+                cell.addItem = {
+                    () in
+                    //  let vc = CreateGroupVC()
+                    let vc = CreateGroupVC()
+                    vc.hidesBottomBarWhenPushed = true
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "messagesCell") as! MessagesCell
+                cell.selectionStyle = .none
+                cell.groupNameLabel.text = groupInfoArray[indexPath.row - 1].Group_Name
+                return cell
             }
-            return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "messagesCell") as! MessagesCell
-            cell.selectionStyle = .none
-            cell.groupNameLabel.text = groupInfoArray[indexPath.row - 1].Group_Name
             return cell
         }
         
     }
-    
-    
 }
 
 class HeaderCell: UITableViewCell{
@@ -278,7 +287,9 @@ class MessagesCell: UITableViewCell{
         groupImage.heightAnchor.constraint(equalToConstant: 70).isActive = true
         groupImage.widthAnchor.constraint(equalToConstant: 70).isActive = true
         
-        groupNameLabel.centerXAnchor.constraint(equalTo: backgroundCardView.centerXAnchor).isActive = true
+       // groupNameLabel.centerXAnchor.constraint(equalTo: backgroundCardView.centerXAnchor).isActive = true
         groupNameLabel.topAnchor.constraint(equalTo: backgroundCardView.topAnchor, constant: 15).isActive = true
+        groupNameLabel.leadingAnchor.constraint(equalTo: groupImage.trailingAnchor, constant: 10).isActive = true
+        groupNameLabel.trailingAnchor.constraint(equalTo: backgroundCardView.trailingAnchor, constant: -10).isActive = true
     }
 }

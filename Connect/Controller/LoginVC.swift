@@ -13,12 +13,16 @@ class LoginVC: UIViewController ,UITextFieldDelegate {
     
     let emailTextField:UITextField = {
         let e = UITextField()
-        e.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        e.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         let centeredParagraphStyle = NSMutableParagraphStyle()
         centeredParagraphStyle.alignment = .left
+        let attributes = [
+            NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1),
+            NSAttributedString.Key.font : UIFont(name: "IBMPlexSans-SemiBoldItalic", size: 17)! // Note the !
+            ] as [NSAttributedString.Key : Any] as [NSAttributedString.Key : Any]
         e.attributedPlaceholder = NSAttributedString(string: "Email",
-                                                     attributes: [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)])
-        e.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                                                     attributes: attributes)
+        e.layer.borderColor = #colorLiteral(red: 0.4078431373, green: 0.1176470588, blue: 0.4392156863, alpha: 1)
         e.layer.borderWidth = 2
         e.textAlignment = .left
         e.setLeftPaddingPoints(10)
@@ -29,8 +33,8 @@ class LoginVC: UIViewController ,UITextFieldDelegate {
         let view = UILabel()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.text = "L O G I N"
-        view.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        view.font = UIFont(name: "HelveticaNeue-Bold", size: 20)
+        view.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        view.font = UIFont(name: "IBMPlexSans-BoldItalic", size: 20)
         view.textAlignment = .center
         return view
     }()
@@ -46,42 +50,59 @@ class LoginVC: UIViewController ,UITextFieldDelegate {
     
     let passwordTextField:UITextField = {
         let p = UITextField()
-        p.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)])
+        
+        let attributes = [
+            NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1),
+            NSAttributedString.Key.font : UIFont(name: "IBMPlexSans-SemiBoldItalic", size: 17)!
+            ] as [NSAttributedString.Key : Any] as [NSAttributedString.Key : Any]
+        
+        p.attributedPlaceholder = NSAttributedString(string: "Password", attributes: attributes)
         p.keyboardType = .emailAddress
-        p.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        p.layer.borderColor = #colorLiteral(red: 0.4078431373, green: 0.1176470588, blue: 0.4392156863, alpha: 1)
         p.layer.borderWidth = 2
         p.textAlignment = .left
         p.setLeftPaddingPoints(10)
-        p.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        p.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         p.isSecureTextEntry = true
         return p
     }()
     
     let loginbutton:UIButton = {
         let l = UIButton(type: .system)
-        l.setTitleColor(.black, for: .normal)
+        l.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
         l.setTitle("Log In", for: .normal)
-        l.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        l.backgroundColor = #colorLiteral(red: 0.4078431373, green: 0.1176470588, blue: 0.4392156863, alpha: 1)
         l.addTarget(self, action: #selector(loginAction), for: .touchUpInside)
         return l
     }()
     
     let forgotPasswordbutton:UIButton = {
         let f = UIButton(type: .system);
-        f.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal);
+        f.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal);
         f.setTitle("Forgot Password?", for: .normal);
-        f.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 14)!
+        f.titleLabel?.font = UIFont(name: "IBMPlexSans-SemiBoldItalic", size: 14)!
         return f
     }()
     
     let haveAnAccountButton:UIButton = {
         let color = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         let font = UIFont.systemFont(ofSize:14)
-        let h = UIButton(type: .system);
-        let attributedTitle = NSMutableAttributedString(string: "Don't Have an account? ", attributes: [NSAttributedString.Key.foregroundColor:color,NSAttributedString.Key.font:font  ])
+        let h = UIButton(type: .system)
+        let attributes = [
+            NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1),
+            NSAttributedString.Key.font : UIFont(name: "IBMPlexSans-SemiBoldItalic", size: 14)! // Note the !
+            ] as [NSAttributedString.Key : Any] as [NSAttributedString.Key : Any]
+        
+        
+        let attributedTitle = NSMutableAttributedString(string: "Don't Have an account? ", attributes: attributes)
         h.setAttributedTitle(attributedTitle, for: .normal);
         
-        attributedTitle.append(NSAttributedString(string:"Sign Up",attributes:[NSAttributedString.Key.foregroundColor:#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), NSAttributedString.Key.font:font]))
+        let signUpAttributes = [
+            NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1),
+            NSAttributedString.Key.font : UIFont(name: "IBMPlexSans-BoldItalic", size: 14)! // Note the !
+            ] as [NSAttributedString.Key : Any] as [NSAttributedString.Key : Any]
+        
+        attributedTitle.append(NSAttributedString(string:"Sign Up",attributes:signUpAttributes))
         h.addTarget(self, action: #selector(signupAction), for: .touchUpInside)
         h.setAttributedTitle(attributedTitle, for: .normal)
         return h
@@ -90,7 +111,7 @@ class LoginVC: UIViewController ,UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = true
-        view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         setupAddLogo()
         setupTextFieldComponents()
         setupLoginButton()
@@ -133,7 +154,11 @@ class LoginVC: UIViewController ,UITextFieldDelegate {
     func setupAddLogo(){
         view.addSubview(icon)
         view.addSubview(signInlabel)
-        icon.anchors(top: view.safeAreaLayoutGuide.topAnchor, topPad: 40, bottom: nil, bottomPad: 0, left: nil, leftPad: 0, right: nil, rightPad: 0, height: 150, width: 150)
+        if #available(iOS 11.0, *) {
+            icon.anchors(top: view.safeAreaLayoutGuide.topAnchor, topPad: 40, bottom: nil, bottomPad: 0, left: nil, leftPad: 0, right: nil, rightPad: 0, height: 150, width: 150)
+        } else {
+            icon.anchors(top: view.topAnchor, topPad: 40, bottom: nil, bottomPad: 0, left: nil, leftPad: 0, right: nil, rightPad: 0, height: 150, width: 150)
+        }
         icon.centerXAnchor.constraint(equalTo:view.centerXAnchor).isActive=true
         
         signInlabel.topAnchor.constraint(equalTo: icon.bottomAnchor, constant: 20).isActive = true
@@ -148,6 +173,7 @@ class LoginVC: UIViewController ,UITextFieldDelegate {
         emailTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 24).isActive = true
         emailTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -24).isActive = true
         emailTextField.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        emailTextField.layer.cornerRadius = 20
     }
     
     func setupPasswordField(){
@@ -157,6 +183,7 @@ class LoginVC: UIViewController ,UITextFieldDelegate {
         passwordTextField.leftAnchor.constraint(equalTo: emailTextField.leftAnchor, constant:0).isActive=true;
         passwordTextField.rightAnchor.constraint(equalTo: emailTextField.rightAnchor, constant: 0).isActive = true;
         passwordTextField.heightAnchor.constraint(equalToConstant: 40).isActive = true;
+        passwordTextField.layer.cornerRadius = 20
     }
     
     func setupLoginButton(){
@@ -166,6 +193,7 @@ class LoginVC: UIViewController ,UITextFieldDelegate {
         loginbutton.leftAnchor.constraint(equalTo: passwordTextField.leftAnchor, constant: 0).isActive = true;
         loginbutton.rightAnchor.constraint(equalTo: passwordTextField.rightAnchor, constant: 0).isActive = true;
         loginbutton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        loginbutton.layer.cornerRadius = 20
     }
     
     func setupForgotPasswordButton(){
@@ -180,7 +208,11 @@ class LoginVC: UIViewController ,UITextFieldDelegate {
     func setuphaveAnAccountbutton(){
         view.addSubview(haveAnAccountButton)
         haveAnAccountButton.translatesAutoresizingMaskIntoConstraints = false
-        haveAnAccountButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8).isActive = true
+        if #available(iOS 11.0, *) {
+            haveAnAccountButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8).isActive = true
+        } else {
+            haveAnAccountButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -8).isActive = true
+        }
         haveAnAccountButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12).isActive = true
         haveAnAccountButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -12).isActive = true
         haveAnAccountButton.heightAnchor.constraint(equalToConstant: 30).isActive = true

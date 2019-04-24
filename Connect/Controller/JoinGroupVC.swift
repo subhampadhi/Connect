@@ -8,6 +8,9 @@
 
 import Foundation
 import UIKit
+import FirebaseDatabase
+import FirebaseAuth
+import CodableFirebase
 
 class JoinGroupVC: UIViewController {
     
@@ -17,9 +20,6 @@ class JoinGroupVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         setUpViews()
-        
-       
-        
     }
     
     var profileImage: UIImageView = {
@@ -55,7 +55,6 @@ class JoinGroupVC: UIViewController {
         label.font = UIFont(name: "IBMPlexSans-Medium", size: 16)
         label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         label.numberOfLines = 0
-        label.text = "This is about to be a big test This is about to be a big test This is about to be a big test This is about to be a big test This is about to be a big test This is about to be a big test This is about to be a big test This is about to be a big test This is about to be a big test This is about to be a big test This is about to be a big test This is about to be a big test This is about to be a big test"
         return label
     }()
     
@@ -76,7 +75,83 @@ class JoinGroupVC: UIViewController {
         return button
     }()
     
-    @objc func joinGroupPressed() {}
+    @objc func joinGroupPressed() {
+        
+        let ref = Database.database().reference().child("Groups")
+        ref.observeSingleEvent(of: .value, with: { snapshot in
+            
+            for child in snapshot.children {
+                let planSnap = child as! DataSnapshot
+                let planDict = planSnap.value as! [String: Any]
+                let name = planDict["Group_Name"] as! String
+                let description = planDict["Description"] as! String
+                if name == self.groupInfo.Group_Name && description == self.groupInfo.Description {
+                    self.joinGroup(groupId: planSnap.key)
+                }
+            }
+        })
+    }
+    
+    func joinGroup(groupId:String) {
+        
+        let ref = Database.database().reference()
+        ref.child("Groups").child(groupId).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            guard let value = snapshot.value else { return }
+            
+            do {
+                let model = try FirebaseDecoder().decode(Groups.self, from: value)
+                var members = model.Members
+                if members == nil {
+                    var memberArray = [String]()
+                    guard let userID = Auth.auth().currentUser?.uid else {return}
+                    memberArray.append(userID)
+                   memberArray = memberArray.removeDuplicates()
+                    print(memberArray)
+                    ref.child("Groups").child(groupId).updateChildValues(["Members" : memberArray])
+                }else {
+                    guard let userID = Auth.auth().currentUser?.uid else {return}
+                    members?.append(userID)
+                    members = members!.removeDuplicates()
+                    ref.child("Groups").child(groupId).updateChildValues(["Members" : members])
+                }
+            } catch let error {
+                print(error)
+            }
+        }) { (error) in
+            Utils.showAlert(title: "Oopd", message: error.localizedDescription, presenter: self)
+        }
+        
+        let userRef = Database.database().reference()
+        guard let userID = Auth.auth().currentUser?.uid else {return}
+        userRef.child("users").child(userID).observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            guard let value = snapshot.value else { return }
+            
+            do {
+                let model = try FirebaseDecoder().decode(Users.self, from: value)
+                var groups = model.groups
+                if groups == nil {
+                    var groupArray = [String]()
+                    groupArray.append(groupId)
+                    ref.child("users").child(userID).updateChildValues(["groups" : groupArray])
+                }else {
+                    groups?.append(groupId)
+                    ref.child("users").child(userID).updateChildValues(["groups" : groups])
+                    print("Saved user into db")
+                }
+            } catch let error {
+                print(error)
+            }
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+        
+        DispatchQueue.main.async {
+            self.navigationController?.popViewController(animated: true)
+        }
+        
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         scrollView.updateContentViewSize()
@@ -158,5 +233,19 @@ extension UIScrollView {
         let oldSize = contentSize
         let newSize = CGSize(width: oldSize.width, height: newHeight + 30)
         contentSize = newSize
+    }
+}
+
+extension Array where Element:Equatable {
+    func removeDuplicates() -> [Element] {
+        var result = [Element]()
+        
+        for value in self {
+            if result.contains(value) == false {
+                result.append(value)
+            }
+        }
+        
+        return result
     }
 }

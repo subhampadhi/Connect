@@ -86,7 +86,7 @@ class ToDoListVC : UIViewController , UITableViewDelegate , UITableViewDataSourc
         toDoTable.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         if #available(iOS 11.0, *) {
             toDoTable.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        } else {
+         } else {
             toDoTable.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         }
         

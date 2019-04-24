@@ -100,6 +100,8 @@ class SearchViewController: UITableViewController , UISearchResultsUpdating {
             do {
                 let model = try FirebaseDecoder().decode(Groups.self, from: value)
                 self.groupsList.append(model)
+                print(self.groupsList.count)
+                
                 self.isReady = true
                 DispatchQueue.main.async {
                     self.tableView.reloadData()

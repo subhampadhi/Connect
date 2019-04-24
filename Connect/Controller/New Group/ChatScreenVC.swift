@@ -19,6 +19,8 @@ class ChatScreenVC: UIViewController, UITextFieldDelegate , UITableViewDelegate 
     var allMessages = [Messages]()
     var isReady = false
     
+    
+    
     lazy var inputTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Enter message..."
@@ -118,13 +120,21 @@ class ChatScreenVC: UIViewController, UITextFieldDelegate , UITableViewDelegate 
         
         
         containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        containerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        if #available(iOS 11.0, *) {
+            containerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        } else {
+            containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        }
         containerView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         containerView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         chatTable.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         chatTable.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        chatTable.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        if #available(iOS 11.0, *) {
+            chatTable.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        } else {
+            chatTable.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        }
         chatTable.bottomAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
         
         containerView.addSubview(sendButton)
@@ -134,6 +144,7 @@ class ChatScreenVC: UIViewController, UITextFieldDelegate , UITableViewDelegate 
         sendButton.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
         sendButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
         sendButton.heightAnchor.constraint(equalToConstant:50).isActive = true
+        
 
         
         addActionButton.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
@@ -145,8 +156,9 @@ class ChatScreenVC: UIViewController, UITextFieldDelegate , UITableViewDelegate 
         
         inputTextField.leadingAnchor.constraint(equalTo: addActionButton.trailingAnchor).isActive = true
         inputTextField.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
-        inputTextField.trailingAnchor.constraint(equalTo: sendButton.trailingAnchor).isActive = true
+        inputTextField.trailingAnchor.constraint(equalTo: sendButton.leadingAnchor , constant: -5).isActive = true
         inputTextField.heightAnchor.constraint(equalTo: containerView.heightAnchor).isActive = true
+
         
         let separatorLineView = UIView()
         separatorLineView.backgroundColor = #colorLiteral(red: 0.862745098, green: 0.862745098, blue: 0.862745098, alpha: 1)
@@ -162,31 +174,40 @@ class ChatScreenVC: UIViewController, UITextFieldDelegate , UITableViewDelegate 
     @objc func addAction() {
         let actionSheet = UIAlertController(title: "Modules", message: "Choose from the list of modules", preferredStyle: .actionSheet)
         
-        if groupInfo?.Notes == "false" || groupInfo?.Notes == nil  {
+       
             actionSheet.addAction(UIAlertAction(title: "Create Notes", style: .default, handler: { (action: UIAlertAction) in
                 self.CreateNotes()
             }))
-        } else {
-            actionSheet.addAction(UIAlertAction(title: "View Notes", style: .default, handler: { (action: UIAlertAction) in
-                self.CreateNotes()
-            }))
-        }
         
-        if groupInfo?.TodoList == "false" || groupInfo?.TodoList == nil  {
-           
-            
             actionSheet.addAction(UIAlertAction(title: "Create To Do List", style: .default, handler: { (action: UIAlertAction) in
                 self.CreateToDoList()
             }))
-        }else {
+        
+        if (groupInfo!.Payment == nil || groupInfo?.Payment == "false") {
+            actionSheet.addAction(UIAlertAction(title: "Create Payments", style: .default, handler: { (action: UIAlertAction) in
+                self.createPayment()
+            }))
             
-            actionSheet.addAction(UIAlertAction(title: "To Do List", style: .default, handler: { (action: UIAlertAction) in
-                self.CreateToDoList()
+        } else {
+            actionSheet.addAction(UIAlertAction(title: "Payment", style: .default, handler: { (action: UIAlertAction) in
+                self.openPayScreen()
             }))
         }
         
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         self.present(actionSheet, animated: true, completion: nil)
+    }
+    
+    func createPayment() {
+        let vc = CreatePaymentModule()
+        vc.groupId = self.groupId
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    func openPayScreen() {
+        let vc = PaymentVC()
+        vc.groupId = self.groupId
+        self.navigationController?.pushViewController(vc, animated: true)
+        
     }
     
     func CreateToDoList () {
@@ -255,6 +276,7 @@ class ChatScreenVC: UIViewController, UITextFieldDelegate , UITableViewDelegate 
             cell.senderNameLabel.text = message.sender_name
             cell.timeLabel.text = message.date
             cell.messageText.text = message.text
+            cell.selectionStyle = .none
             return cell
         }else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "incommingChatMessageCell") as! IncommingChatMessageCell
@@ -263,6 +285,7 @@ class ChatScreenVC: UIViewController, UITextFieldDelegate , UITableViewDelegate 
             cell.senderNameLabel.text = message.sender_name
             cell.timeLabel.text = message.date
             cell.messageText.text = message.text
+            cell.selectionStyle = .none
             return cell
         }
     }

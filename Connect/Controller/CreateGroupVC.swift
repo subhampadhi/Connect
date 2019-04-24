@@ -117,7 +117,7 @@ class CreateGroupVC: UIViewController {
         let groupRefrence = ref.child("Groups").childByAutoId()
         let groupId = groupRefrence.key
         
-        let values = ["Group_Name":groupName , "Description": groupInfoText , "Members":["\(userID)"] , "ToDoList" : "False" , "Notes": "False" , "PrivateGroup":"\(self.isPrivateGroup)"] as [String : Any]
+        let values = ["Group_Name":groupName , "Description": groupInfoText , "Members":["\(userID)"] , "ToDoList" : "false" , "Notes": "false" , "PrivateGroup":"\(self.isPrivateGroup)", "Payment":"false"] as [String : Any]
         groupRefrence.updateChildValues(values, withCompletionBlock: { (err, ref) in
             
             if err != nil {
@@ -163,7 +163,11 @@ class CreateGroupVC: UIViewController {
         view.addSubview(groupPrivacySwitch)
         view.addSubview(privacyLabel)
         
-        groupNameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
+        if #available(iOS 11.0, *) {
+            groupNameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
+        } else {
+            groupNameLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 50).isActive = true
+        }
         groupNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant:15).isActive = true
         groupNameLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant:-15).isActive = true
         

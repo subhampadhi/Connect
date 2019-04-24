@@ -163,7 +163,11 @@ class NotesScreenVC: UIViewController , UITextViewDelegate {
         view.addSubview(titleField)
         view.addSubview(descriptionField)
         
-        dateLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15).isActive = true
+        if #available(iOS 11.0, *) {
+            dateLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15).isActive = true
+        } else {
+            // Fallback on earlier versions
+        }
         dateLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         if isNewNote {

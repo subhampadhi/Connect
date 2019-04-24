@@ -8,6 +8,9 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseDatabase
+import FirebaseAuth
+import CodableFirebase
 
 class SettingsViewController: UIViewController {
     
@@ -20,8 +23,30 @@ class SettingsViewController: UIViewController {
         
         if Auth.auth().currentUser?.uid == nil {
             handleLogout()
+        
+        
         }
     }
+        
+    
+    
+    var sendButton: UIButton = {
+        
+        let sendButton = UIButton(type: .system)
+        sendButton.setTitle("Send", for: UIControl.State())
+        sendButton.translatesAutoresizingMaskIntoConstraints = false
+        sendButton.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
+        return sendButton
+    }()
+    
+    @objc func handleSend() {
+        
+        let vc = CreatePaymentModule()
+        vc.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    
     @objc func handleLogout() {
         
         do {

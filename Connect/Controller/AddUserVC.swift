@@ -170,7 +170,11 @@ class AddUserVC: UIViewController , UITableViewDelegate , UITableViewDataSource 
         
         usersTable.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         usersTable.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        usersTable.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        if #available(iOS 11.0, *) {
+            usersTable.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        } else {
+           usersTable.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        }
         usersTable.bottomAnchor.constraint(equalTo: addMemberButton.topAnchor).isActive = true
         
     }

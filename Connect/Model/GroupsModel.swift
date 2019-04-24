@@ -16,4 +16,5 @@ struct Groups: Codable {
     var Notes : String?
     var TodoList : String?
     var PrivateGroup: String?
+    var Payment: String?
 }
