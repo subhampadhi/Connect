@@ -184,7 +184,7 @@ class ChatScreenVC: UIViewController, UITextFieldDelegate , UITableViewDelegate 
             }))
         
         if (groupInfo!.Payment == nil || groupInfo?.Payment == "false") {
-            actionSheet.addAction(UIAlertAction(title: "Create Payments", style: .default, handler: { (action: UIAlertAction) in
+           actionSheet.addAction(UIAlertAction(title: "Create Payments", style: .default, handler: { (action: UIAlertAction) in
                 self.createPayment()
             }))
             
@@ -202,6 +202,7 @@ class ChatScreenVC: UIViewController, UITextFieldDelegate , UITableViewDelegate 
         let vc = CreatePaymentModule()
         vc.groupId = self.groupId
         self.navigationController?.pushViewController(vc, animated: true)
+       // Utils.showAlert(title: "Oops", message: "We are working on this issue , Your payments will be out soon", presenter: self)
     }
     func openPayScreen() {
         let vc = PaymentVC()

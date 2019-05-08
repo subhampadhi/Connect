@@ -8,9 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0F0094C5225E93490044AB94 /* PaymentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0094C4225E93490044AB94 /* PaymentVC.swift */; };
-		0F0094C7225F37700044AB94 /* PaymentSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F0094C6225F37700044AB94 /* PaymentSDK.framework */; settings = {ATTRIBUTES = (Required, ); }; };
-		0F0094C8225F37B10044AB94 /* PaymentSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F0094C6225F37700044AB94 /* PaymentSDK.framework */; settings = {ATTRIBUTES = (Required, ); }; };
-		0F0094C9225F37B10044AB94 /* PaymentSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0F0094C6225F37700044AB94 /* PaymentSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0F0094CC225F38C50044AB94 /* WSManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0094CB225F38C50044AB94 /* WSManager.swift */; };
 		0F0094CE225F3B850044AB94 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0094CD225F3B850044AB94 /* Constant.swift */; };
 		0F0094D0225F3C190044AB94 /* CheckSumModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0094CF225F3C190044AB94 /* CheckSumModel.swift */; };
@@ -61,6 +58,9 @@
 		0F4D662D2258BDA00071EE94 /* NotesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4D662C2258BDA00071EE94 /* NotesModel.swift */; };
 		0F4D6633225B990A0071EE94 /* JoinGroupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4D6632225B990A0071EE94 /* JoinGroupVC.swift */; };
 		0F5372532244DCD50011683C /* NotesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5372522244DCD50011683C /* NotesVC.swift */; };
+		0FA79A4D22830614002EA4CE /* PaymentSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FA79A4C22830614002EA4CE /* PaymentSDK.framework */; };
+		0FA79A4E22830656002EA4CE /* PaymentSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FA79A4C22830614002EA4CE /* PaymentSDK.framework */; };
+		0FA79A4F22830656002EA4CE /* PaymentSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0FA79A4C22830614002EA4CE /* PaymentSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		59B681D9C6D3006861796F43 /* Pods_ConnectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 549BB64619CC9F0AD80291E2 /* Pods_ConnectTests.framework */; };
 		86AFF189E2EAF7A80212E904 /* Pods_Connect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30C27C8E481DAA0D9A7DD6AD /* Pods_Connect.framework */; };
 		D766F82E8B15FAB0E58CDA78 /* Pods_ConnectUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE87AA7F2A6F5E3733587D6C /* Pods_ConnectUITests.framework */; };
@@ -84,13 +84,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		0F0094CA225F37B10044AB94 /* Embed Frameworks */ = {
+		0FA79A5022830656002EA4CE /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				0F0094C9225F37B10044AB94 /* PaymentSDK.framework in Embed Frameworks */,
+				0FA79A4F22830656002EA4CE /* PaymentSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -99,7 +99,6 @@
 
 /* Begin PBXFileReference section */
 		0F0094C4225E93490044AB94 /* PaymentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentVC.swift; sourceTree = "<group>"; };
-		0F0094C6225F37700044AB94 /* PaymentSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PaymentSDK.framework; sourceTree = "<group>"; };
 		0F0094CB225F38C50044AB94 /* WSManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WSManager.swift; sourceTree = "<group>"; };
 		0F0094CD225F3B850044AB94 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		0F0094CF225F3C190044AB94 /* CheckSumModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckSumModel.swift; sourceTree = "<group>"; };
@@ -156,6 +155,7 @@
 		0F4D662C2258BDA00071EE94 /* NotesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesModel.swift; sourceTree = "<group>"; };
 		0F4D6632225B990A0071EE94 /* JoinGroupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinGroupVC.swift; sourceTree = "<group>"; };
 		0F5372522244DCD50011683C /* NotesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesVC.swift; sourceTree = "<group>"; };
+		0FA79A4C22830614002EA4CE /* PaymentSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PaymentSDK.framework; path = "../../../Downloads/Paytm_iOS_App_Kit-master/Swift/BitCodeEnabled/PaymentSDK.framework"; sourceTree = "<group>"; };
 		30C27C8E481DAA0D9A7DD6AD /* Pods_Connect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Connect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		51CB5E7B8B7EDD6A7B3C7B21 /* Pods-Connect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Connect.release.xcconfig"; path = "Pods/Target Support Files/Pods-Connect/Pods-Connect.release.xcconfig"; sourceTree = "<group>"; };
 		53246C6DF1B52BD4E303172B /* Pods-ConnectUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConnectUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ConnectUITests/Pods-ConnectUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -172,8 +172,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0F0094C8225F37B10044AB94 /* PaymentSDK.framework in Frameworks */,
-				0F0094C7225F37700044AB94 /* PaymentSDK.framework in Frameworks */,
+				0FA79A4E22830656002EA4CE /* PaymentSDK.framework in Frameworks */,
+				0FA79A4D22830614002EA4CE /* PaymentSDK.framework in Frameworks */,
 				86AFF189E2EAF7A80212E904 /* Pods_Connect.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -247,7 +247,7 @@
 		0F226775221DFEA60052BB21 = {
 			isa = PBXGroup;
 			children = (
-				0F0094C6225F37700044AB94 /* PaymentSDK.framework */,
+				0FA79A4C22830614002EA4CE /* PaymentSDK.framework */,
 				0F226780221DFEA60052BB21 /* Connect */,
 				0F226798221DFEA80052BB21 /* ConnectTests */,
 				0F2267A3221DFEA80052BB21 /* ConnectUITests */,
@@ -386,7 +386,7 @@
 				0F22677B221DFEA60052BB21 /* Frameworks */,
 				0F22677C221DFEA60052BB21 /* Resources */,
 				3C368A57B4F371058B681833 /* [CP] Embed Pods Frameworks */,
-				0F0094CA225F37B10044AB94 /* Embed Frameworks */,
+				0FA79A5022830656002EA4CE /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -830,7 +830,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.subhampadhi.Connect;
+				PRODUCT_BUNDLE_IDENTIFIER = com.padhi.subham.Connect;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -854,7 +854,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.subhampadhi.Connect;
+				PRODUCT_BUNDLE_IDENTIFIER = com.padhi.subham.Connect;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;

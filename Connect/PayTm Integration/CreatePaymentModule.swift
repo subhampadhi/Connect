@@ -133,7 +133,7 @@ class CreatePaymentModule: UIViewController {
                 } else {
                     let reference = Database.database().reference().child("Groups").child(self.groupId!)
                     reference.updateChildValues(["Payment": "true"])
-                     Utils.showAlertWithAction(title: "Success", message: "Your Payment module has been set", presenter: self)
+                    Utils.showAlertWithAction(title: "Success", message: "Your Payment module has been set", presenter: self)
                 }
             })
             
